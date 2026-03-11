@@ -1,0 +1,38 @@
+/* CONTENT.CSS */
+.storage-bar-card{margin-bottom:20px}
+.view-toggle{display:flex;border:1px solid var(--border);overflow:hidden}
+.view-btn{background:none;border:none;padding:8px 10px;cursor:pointer;transition:background var(--transition);display:flex;align-items:center;justify-content:center}
+.view-btn svg{width:14px;height:14px;stroke:var(--text-soft);fill:none}
+.view-btn.active{background:var(--blush)}
+.view-btn.active svg{stroke:var(--rose)}
+.view-btn:hover svg{stroke:var(--text)}
+
+/* Media grid */
+.media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+.media-item{border:2px solid transparent;cursor:pointer;position:relative;aspect-ratio:1;background:var(--blush);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:border-color var(--transition)}
+.media-item:hover,.media-item.selected{border-color:var(--rose)}
+.media-item img{width:100%;height:100%;object-fit:cover}
+.media-item svg{width:32px;height:32px;stroke:var(--text-soft);fill:none}
+.media-item.video-item{background:rgba(74,106,176,.08)}
+.media-item.doc-item{background:rgba(201,169,110,.1)}
+.media-check{position:absolute;top:6px;right:6px;width:20px;height:20px;background:var(--rose);border-radius:50%;display:none;align-items:center;justify-content:center}
+.media-item.selected .media-check{display:flex}
+.media-check svg{width:10px;height:10px;stroke:#fff;fill:none}
+.media-label{font-size:10px;color:var(--text-soft);text-align:center;margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.media-size{font-size:9px;color:var(--text-soft);opacity:.7;text-align:center}
+.media-type-badge{position:absolute;bottom:4px;left:4px;background:rgba(42,31,26,.6);color:#fff;font-size:8px;padding:2px 5px;letter-spacing:.06em;text-transform:uppercase}
+
+/* Media list view */
+.media-list-view table{width:100%}
+
+/* Upload progress */
+.upload-progress-item{margin-bottom:12px;padding:12px;background:var(--off-white);border:1px solid var(--border)}
+.upload-file-name{font-size:12px;font-weight:500;margin-bottom:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.upload-file-meta{font-size:10px;color:var(--text-soft);margin-bottom:6px}
+
+/* Preview modal */
+.preview-image{max-width:100%;max-height:400px;margin:0 auto;display:block}
+.preview-video{width:100%;max-height:400px}
+
+@media(max-width:768px){.media-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}}
+@media(max-width:480px){.media-grid{grid-template-columns:repeat(3,1fr)}}

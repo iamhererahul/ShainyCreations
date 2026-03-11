@@ -1,0 +1,21 @@
+/* REPORTS.CSS */
+.report-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+
+.priority-high{color:var(--badge-red);font-weight:600;font-size:11px}
+.priority-medium{color:var(--orange);font-weight:600;font-size:11px}
+.priority-low{color:var(--green);font-weight:600;font-size:11px}
+
+/* Report detail modal */
+.report-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.report-info-block{background:var(--off-white);padding:12px;border:1px solid var(--border)}
+.report-info-label{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--text-soft);font-weight:600;margin-bottom:3px}
+.report-info-val{font-size:13px;font-weight:500}
+.report-message-box{background:var(--off-white);border:1px solid var(--border);padding:16px;font-size:13px;line-height:1.8;margin-bottom:16px}
+.report-timeline{border-left:2px solid var(--border);padding-left:16px;margin-bottom:16px}
+.timeline-item{position:relative;padding-bottom:14px}
+.timeline-item::before{content:'';position:absolute;left:-20px;top:4px;width:8px;height:8px;border-radius:50%;background:var(--rose);border:2px solid var(--white)}
+.timeline-time{font-size:10px;color:var(--text-soft);margin-bottom:2px}
+.timeline-text{font-size:12px}
+
+@media(max-width:768px){.report-stats-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.report-stats-grid{grid-template-columns:1fr 1fr}}

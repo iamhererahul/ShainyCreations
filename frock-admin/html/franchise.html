@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Shainy Creation – Franchise Requests</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/franchise.css">
+</head>
+<body>
+<div id="sidebar-container"></div>
+<div class="main">
+  <div id="topbar-container"></div>
+  <div class="page-content">
+
+    <div class="page-header">
+      <div>
+        <h1 class="page-heading">Franchise Requests</h1>
+        <p class="text-soft text-sm">Applications submitted through your website</p>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="exportFranchise()">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export CSV
+      </button>
+    </div>
+
+    <!-- Stats -->
+    <div class="franchise-stats-grid">
+      <div class="mini-stat"><div class="mini-stat-label">Total Applications</div><div class="mini-stat-val" id="fr-total">0</div></div>
+      <div class="mini-stat orange"><div class="mini-stat-label">New / Unread</div><div class="mini-stat-val" id="fr-new">0</div></div>
+      <div class="mini-stat green"><div class="mini-stat-label">Approved</div><div class="mini-stat-val" id="fr-approved">0</div></div>
+      <div class="mini-stat red"><div class="mini-stat-label">Rejected</div><div class="mini-stat-val" id="fr-rejected">0</div></div>
+    </div>
+
+    <div class="filter-row">
+      <input class="filter-input" placeholder="Search by name, city, email…" id="fr-search" oninput="filterFranchise()">
+      <select class="filter-select" id="fr-status" onchange="filterFranchise()">
+        <option value="">All Statuses</option>
+        <option>New</option><option>Under Review</option><option>Approved</option><option>Rejected</option>
+      </select>
+      <select class="filter-select" id="fr-sort" onchange="filterFranchise()">
+        <option>Newest First</option><option>Oldest First</option>
+      </select>
+    </div>
+
+    <!-- Application Cards -->
+    <div id="franchise-cards" class="franchise-grid"></div>
+
+  </div>
+</div>
+
+<!-- Franchise Detail Modal -->
+<div class="modal-overlay" id="franchiseModal">
+  <div class="modal modal-xl">
+    <div class="modal-header">
+      <div class="modal-title" id="fr-modal-title">Franchise Application</div>
+      <button class="modal-close" onclick="closeModal('franchiseModal')">×</button>
+    </div>
+    <div class="modal-body" id="fr-modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn btn-danger btn-sm" onclick="rejectFranchise()">Reject</button>
+      <button class="btn btn-outline" onclick="closeModal('franchiseModal')">Close</button>
+      <button class="btn btn-primary" onclick="approveFranchise()">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Approve Application
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span id="toast-msg">Done!</span></div>
+
+<script src="../js/data.js"></script>
+<script src="../js/components.js"></script>
+<script src="../js/franchise.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+/* FINANCE.CSS */
+.finance-stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
+
+/* Bank accounts */
+.bank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.bank-card{border:2px solid var(--border);padding:18px;position:relative;transition:all var(--transition);background:var(--white)}
+.bank-card:hover{border-color:var(--rose-dark);box-shadow:var(--shadow-sm)}
+.bank-card.primary{border-color:var(--rose);background:var(--blush)}
+.bank-card.primary::after{content:'Primary';position:absolute;top:10px;right:12px;background:var(--rose);color:#fff;font-size:9px;font-weight:700;padding:2px 8px;letter-spacing:.1em;text-transform:uppercase}
+.bank-logo{width:44px;height:28px;background:var(--blush-mid);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text);margin-bottom:12px}
+.bank-card.primary .bank-logo{background:rgba(200,121,106,.2)}
+.bank-name{font-size:14px;font-weight:600;margin-bottom:3px}
+.bank-acc-num{font-family:monospace;font-size:13px;color:var(--text-soft);letter-spacing:.08em;margin-bottom:6px}
+.bank-holder{font-size:11px;color:var(--text-soft)}
+.bank-actions{display:flex;gap:6px;margin-top:14px;padding-top:12px;border-top:1px solid var(--border)}
+
+/* Payment gateway grid */
+.payment-gateway-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+.payment-card{border:2px solid var(--border);padding:18px;cursor:pointer;position:relative;transition:all var(--transition);background:var(--white)}
+.payment-card:hover{border-color:var(--rose-dark);background:var(--off-white)}
+.payment-card.active{border-color:var(--rose);background:var(--blush)}
+.payment-card.active::after{content:'✓';position:absolute;top:10px;right:12px;color:var(--rose);font-weight:700;font-size:14px}
+.payment-logo{width:44px;height:28px;background:var(--blush-mid);border-radius:4px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text)}
+.payment-name{font-weight:600;font-size:14px;margin-bottom:3px}
+.payment-desc{font-size:11px;color:var(--text-soft);line-height:1.5}
+
+/* Gateway config */
+.gateway-config{background:var(--off-white);border:1px solid var(--border);padding:20px;margin-top:4px}
+.gateway-config .card-title{font-size:16px;margin-bottom:14px}
+
+@media(max-width:900px){.payment-gateway-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.finance-stats-grid{grid-template-columns:repeat(2,1fr)}.bank-grid{grid-template-columns:1fr}.payment-gateway-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.finance-stats-grid{grid-template-columns:1fr}.payment-gateway-grid{grid-template-columns:1fr}}

@@ -1,0 +1,21 @@
+/* ANALYTICS.CSS */
+.analytics-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.analytics-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:20px}
+
+/* Best products list */
+.best-product-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.best-product-row:last-child{border-bottom:none}
+.best-rank{width:22px;height:22px;background:var(--blush);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--rose);flex-shrink:0}
+.best-rank.top{background:var(--rose);color:#fff}
+.best-product-name{flex:1;font-size:12px;font-weight:500}
+.best-product-sales{font-size:12px;font-weight:600;color:var(--text-soft);white-space:nowrap}
+
+/* Trending badge */
+.trending-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.trending-item:last-child{border-bottom:none}
+.trending-flame{font-size:16px;flex-shrink:0}
+.trending-name{flex:1;font-size:12px;font-weight:500}
+.trending-growth{font-size:11px;color:var(--green);font-weight:600}
+
+@media(max-width:900px){.analytics-grid-2{grid-template-columns:1fr}.analytics-grid-3{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.analytics-grid-3{grid-template-columns:1fr}}

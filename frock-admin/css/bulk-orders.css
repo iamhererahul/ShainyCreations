@@ -1,0 +1,17 @@
+/* BULK-ORDERS.CSS */
+.bulk-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+
+.bulk-label{border:2px solid #1a1a1a;padding:24px;background:#fff}
+.bulk-label .label-brand{font-size:18px}
+.bulk-badge{display:inline-block;background:var(--text);color:#fff;font-size:10px;padding:2px 8px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.bulk-items-list{border:1px solid var(--border);margin:12px 0}
+.bulk-item-row{display:flex;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--border);font-size:12px}
+.bulk-item-row:last-child{border-bottom:none}
+
+/* Detail modal */
+.bulk-company-header{display:flex;align-items:center;gap:14px;background:var(--off-white);padding:16px;border:1px solid var(--border);margin-bottom:16px}
+.company-avatar{width:44px;height:44px;background:var(--rose);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:20px;color:#fff;flex-shrink:0}
+.company-name{font-size:16px;font-weight:600}
+.company-meta{font-size:11px;color:var(--text-soft);margin-top:2px}
+
+@media(max-width:768px){.bulk-stats-grid{grid-template-columns:repeat(2,1fr)}}

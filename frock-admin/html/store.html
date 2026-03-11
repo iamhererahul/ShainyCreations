@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Shainy Creation – Store Locations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/store.css">
+</head>
+<body>
+<div id="sidebar-container"></div>
+<div class="main">
+  <div id="topbar-container"></div>
+  <div class="page-content">
+
+    <div class="page-header">
+      <h1 class="page-heading">Store Locations</h1>
+      <button class="btn btn-primary" onclick="openModal('addLocationModal')">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Location
+      </button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stat-grid" style="margin-bottom:20px">
+      <div class="stat-card"><div class="stat-label">Total Branches</div><div class="stat-value" id="loc-total">5</div><div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg></div></div>
+      <div class="stat-card"><div class="stat-label">Active Branches</div><div class="stat-value" id="loc-active">4</div><div class="stat-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+      <div class="stat-card"><div class="stat-label">Top Branch Revenue</div><div class="stat-value">₹62,400</div><div class="stat-change">Bengaluru Main</div></div>
+      <div class="stat-card"><div class="stat-label">Total Staff</div><div class="stat-value" id="loc-staff">42</div><div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div></div>
+    </div>
+
+    <div class="filter-row">
+      <input class="filter-input" placeholder="Search locations…" id="loc-search" oninput="filterLocations()">
+      <select class="filter-select" id="loc-status-filter" onchange="filterLocations()">
+        <option value="">All Statuses</option><option>Active</option><option>Coming Soon</option><option>Temporarily Closed</option>
+      </select>
+    </div>
+
+    <div class="location-grid" id="location-cards"></div>
+
+    <!-- Store Login Section -->
+    <div class="card" style="margin-top:24px">
+      <div class="card-header">
+        <div><div class="card-title">Store Login Access</div><div class="card-subtitle">Each store has its own login credentials</div></div>
+        <button class="btn btn-outline btn-sm" onclick="openModal('storeLoginModal')">Manage Logins</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Store</th><th>Login Email</th><th>Last Active</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="store-logins-table"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Location Modal -->
+<div class="modal-overlay" id="addLocationModal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <div class="modal-title" id="location-modal-title">Add Store Location</div>
+      <button class="modal-close" onclick="closeModal('addLocationModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="edit-loc-id">
+      <div class="form-2col">
+        <div class="form-group"><label class="form-label">Branch Name *</label><input class="form-input" id="loc-name" placeholder="e.g. Mumbai Central"></div>
+        <div class="form-group"><label class="form-label">Manager Name</label><input class="form-input" id="loc-manager" placeholder="Manager name"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Address *</label><input class="form-input" id="loc-address" placeholder="Full street address"></div>
+      <div class="form-3col">
+        <div class="form-group"><label class="form-label">City *</label><input class="form-input" id="loc-city" placeholder="City"></div>
+        <div class="form-group"><label class="form-label">State</label><input class="form-input" id="loc-state" placeholder="State"></div>
+        <div class="form-group"><label class="form-label">PIN Code</label><input class="form-input" id="loc-pin" placeholder="560034"></div>
+      </div>
+      <div class="form-2col">
+        <div class="form-group"><label class="form-label">Phone</label><input class="form-input" id="loc-phone" placeholder="+91 98765 43210"></div>
+        <div class="form-group"><label class="form-label">Status</label>
+          <select class="form-select" id="loc-status"><option>Active</option><option>Coming Soon</option><option>Temporarily Closed</option></select>
+        </div>
+      </div>
+      <div class="form-group"><label class="form-label">Store Email (for login)</label><input class="form-input" id="loc-email" type="email" placeholder="store@shainycreation.com"></div>
+      <div class="form-group"><label class="form-label">Store Working Hours</label><input class="form-input" id="loc-hours" placeholder="Mon–Sat: 10 AM – 8 PM"></div>
+      <div class="form-group"><label class="form-label">Google Maps Link</label><input class="form-input" id="loc-maps" placeholder="https://maps.google.com/..."></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('addLocationModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveLocation()">Save Location</button>
+    </div>
+  </div>
+</div>
+
+<!-- Store Login Modal -->
+<div class="modal-overlay" id="storeLoginModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Store Login Management</div>
+      <button class="modal-close" onclick="closeModal('storeLoginModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Select Store</label>
+        <select class="form-select" id="login-store-select"></select>
+      </div>
+      <div class="form-2col">
+        <div class="form-group"><label class="form-label">Login Email</label><input class="form-input" id="login-email" type="email"></div>
+        <div class="form-group"><label class="form-label">Reset Password</label><input class="form-input" id="login-password" type="password" placeholder="New password"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Access Level</label>
+        <select class="form-select" id="login-access">
+          <option>Full Access</option><option>Orders Only</option><option>View Only</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('storeLoginModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveStoreLogin()">Save Login</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span id="toast-msg">Done!</span></div>
+
+<script src="../js/data.js"></script>
+<script src="../js/components.js"></script>
+<script src="../js/store.js"></script>
+</body>
+</html>

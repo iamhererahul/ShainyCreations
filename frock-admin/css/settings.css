@@ -1,0 +1,29 @@
+/* SETTINGS.CSS */
+.settings-layout{display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:start}
+.settings-sidenav{display:flex;flex-direction:column;gap:2px;position:sticky;top:76px}
+.settings-nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:6px;color:var(--text-soft);font-size:12px;font-weight:500;cursor:pointer;transition:all var(--transition)}
+.settings-nav-item:hover{background:var(--blush);color:var(--text)}
+.settings-nav-item.active{background:var(--blush);color:var(--text)}
+.settings-nav-item svg{width:15px;height:15px;stroke:currentColor;fill:none;flex-shrink:0;opacity:.75}
+.settings-nav-item.active svg{opacity:1}
+
+.settings-content{min-width:0}
+.settings-tab{display:none}
+.settings-tab.active{display:block;animation:fadeInUp .2s ease}
+
+/* Branding upload */
+.branding-upload{border:2px dashed var(--border);padding:24px;text-align:center;cursor:pointer;transition:all var(--transition);background:var(--off-white);margin-top:6px}
+.branding-upload:hover{border-color:var(--rose);background:var(--blush)}
+.branding-upload svg{width:24px;height:24px;stroke:var(--text-soft);fill:none;margin:0 auto 8px}
+.branding-upload p{font-size:11px;color:var(--text-soft)}
+.branding-upload.small{padding:14px}
+.branding-upload.small svg{width:18px;height:18px;margin-bottom:4px}
+
+/* Team table in settings */
+.team-table td{padding:12px 14px}
+.team-role-select{padding:5px 24px 5px 10px;border:1px solid var(--border);background:var(--white);font-family:'Jost',sans-serif;font-size:11px;color:var(--text);outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%237a6458' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center}
+
+/* Session items */
+.session-item{display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--off-white);border:1px solid var(--border);margin-bottom:8px;gap:12px}
+
+@media(max-width:900px){.settings-layout{grid-template-columns:1fr}.settings-sidenav{position:static;flex-direction:row;flex-wrap:wrap;gap:4px;margin-bottom:16px}.settings-nav-item{padding:7px 12px;font-size:11px}}

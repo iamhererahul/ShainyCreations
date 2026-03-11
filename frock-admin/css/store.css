@@ -1,0 +1,22 @@
+/* STORE.CSS */
+.location-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
+.location-card{background:var(--white);border:1px solid var(--border);padding:20px;transition:box-shadow var(--transition);position:relative}
+.location-card:hover{box-shadow:var(--shadow-md)}
+.location-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.location-icon{width:40px;height:40px;background:var(--blush);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.location-icon svg{width:18px;height:18px;stroke:var(--rose);fill:none}
+.location-name{font-weight:600;font-size:15px;margin-bottom:3px}
+.location-address{font-size:11px;color:var(--text-soft);line-height:1.7}
+.location-footer{margin-top:14px;padding-top:12px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.location-manager{font-size:11px;color:var(--text-soft)}
+.location-manager strong{color:var(--text);font-size:12px}
+.location-revenue{color:var(--rose);font-weight:600;font-size:14px}
+.location-actions{display:flex;gap:6px;margin-top:12px}
+
+/* Store login table */
+.login-email{font-family:monospace;font-size:11px;color:var(--text-soft)}
+.last-active{font-size:11px;color:var(--text-soft)}
+
+@media(max-width:1100px){.location-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.location-grid{grid-template-columns:1fr}}

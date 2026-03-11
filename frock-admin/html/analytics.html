@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Shainy Creation – Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/analytics.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+</head>
+<body>
+<div id="sidebar-container"></div>
+<div class="main">
+  <div id="topbar-container"></div>
+  <div class="page-content">
+
+    <div class="page-header">
+      <h1 class="page-heading">Analytics</h1>
+      <div style="display:flex;gap:8px">
+        <select class="filter-select" id="analytics-range" onchange="reloadCharts()">
+          <option>Last 7 Days</option><option selected>Last 30 Days</option><option>Last 90 Days</option><option>This Year</option>
+        </select>
+        <button class="btn btn-outline btn-sm" onclick="exportAnalytics()">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export Report
+        </button>
+      </div>
+    </div>
+
+    <!-- KPI Stats -->
+    <div class="stat-grid" style="margin-bottom:20px">
+      <div class="stat-card"><div class="stat-label">Page Views</div><div class="stat-value">48,291</div><div class="stat-change up">▲ 22.1%</div><div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div></div>
+      <div class="stat-card"><div class="stat-label">Conversion Rate</div><div class="stat-value">3.8%</div><div class="stat-change up">▲ 0.6%</div><div class="stat-icon"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div></div>
+      <div class="stat-card"><div class="stat-label">New Customers</div><div class="stat-value">1,284</div><div class="stat-change up">▲ 14.3%</div><div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div></div>
+      <div class="stat-card"><div class="stat-label">Repeat Purchase Rate</div><div class="stat-value">41%</div><div class="stat-change up">▲ 5.2%</div><div class="stat-icon"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg></div></div>
+    </div>
+
+    <!-- Charts Row 1 -->
+    <div class="analytics-grid-2" style="margin-bottom:20px">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Revenue Over Time</div></div>
+        <div class="chart-wrap" style="height:240px"><canvas id="revenueLineChart"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">Sales by Category</div></div>
+        <div class="chart-wrap" style="height:240px"><canvas id="categoryChart"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Charts Row 2 -->
+    <div class="analytics-grid-3" style="margin-bottom:20px">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Traffic Sources</div></div>
+        <div class="chart-wrap" style="height:200px"><canvas id="trafficChart"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">Sales by Age Group</div></div>
+        <div class="chart-wrap" style="height:200px"><canvas id="ageChart"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">Orders by Day</div></div>
+        <div class="chart-wrap" style="height:200px"><canvas id="dayChart"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Best Selling + Trending -->
+    <div class="analytics-grid-2">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🔥 Trending Products</div>
+          <span class="badge badge-danger">Hot Right Now</span>
+        </div>
+        <div id="trending-products"></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">Best Selling Products</div></div>
+        <div id="best-products-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span id="toast-msg">Done!</span></div>
+
+<script src="../js/data.js"></script>
+<script src="../js/components.js"></script>
+<script src="../js/analytics.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Shainy Creation – Finance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/finance.css">
+</head>
+<body>
+<div id="sidebar-container"></div>
+<div class="main">
+  <div id="topbar-container"></div>
+  <div class="page-content">
+
+    <div class="page-header">
+      <h1 class="page-heading">Finance & Banking</h1>
+      <button class="btn btn-primary btn-sm" onclick="openModal('addBankModal')">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Bank Account
+      </button>
+    </div>
+
+    <!-- Finance Stats -->
+    <div class="finance-stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total Collected</div>
+        <div class="stat-value">₹18,47,200</div>
+        <div class="stat-change up">▲ 18.2% this month</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Pending Payouts</div>
+        <div class="stat-value">₹84,320</div>
+        <div class="stat-change" style="color:var(--orange)">2 payouts pending</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Refunds This Month</div>
+        <div class="stat-value">₹12,450</div>
+        <div class="stat-change down">▼ 1.2% vs last month</div>
+      </div>
+    </div>
+
+    <!-- Bank Accounts -->
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-header">
+        <div><div class="card-title">Bank Accounts</div><div class="card-subtitle">All order payments will be settled to the primary account</div></div>
+      </div>
+      <div id="bank-accounts-grid" class="bank-grid"></div>
+    </div>
+
+    <!-- Payment Gateways -->
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-header">
+        <div><div class="card-title">Payment Gateways</div><div class="card-subtitle">Configure how customers pay you</div></div>
+      </div>
+      <div class="payment-gateway-grid" id="payment-gateways"></div>
+      <div id="gateway-config-panel" class="gateway-config"></div>
+    </div>
+
+    <!-- Transaction History -->
+    <div class="card">
+      <div class="card-header"><div class="card-title">Transaction History</div></div>
+      <div class="filter-row">
+        <input class="filter-input" placeholder="Search transactions…" id="txn-search" oninput="filterTransactions()">
+        <select class="filter-select" id="txn-gateway" onchange="filterTransactions()">
+          <option value="">All Gateways</option><option>Razorpay</option><option>UPI</option><option>COD</option><option>Paytm</option>
+        </select>
+        <select class="filter-select" id="txn-range" onchange="filterTransactions()">
+          <option>Last 30 Days</option><option>Last 7 Days</option><option>This Month</option><option>All Time</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Transaction ID</th><th>Order</th><th>Customer</th><th>Gateway</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead>
+          <tbody id="txn-table"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Bank Account Modal -->
+<div class="modal-overlay" id="addBankModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Add Bank Account</div>
+      <button class="modal-close" onclick="closeModal('addBankModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Account Holder Name</label><input class="form-input" id="bank-holder" placeholder="As per bank records"></div>
+      <div class="form-group"><label class="form-label">Bank Name</label>
+        <select class="form-select" id="bank-name">
+          <option>State Bank of India</option><option>HDFC Bank</option><option>ICICI Bank</option><option>Axis Bank</option><option>Kotak Mahindra Bank</option><option>Punjab National Bank</option><option>Bank of Baroda</option><option>Yes Bank</option><option>IndusInd Bank</option><option>Other</option>
+        </select>
+      </div>
+      <div class="form-2col">
+        <div class="form-group"><label class="form-label">Account Number</label><input class="form-input" id="bank-acc" placeholder="Enter account number" type="password"></div>
+        <div class="form-group"><label class="form-label">Confirm Account Number</label><input class="form-input" id="bank-acc-confirm" placeholder="Re-enter account number"></div>
+      </div>
+      <div class="form-2col">
+        <div class="form-group"><label class="form-label">IFSC Code</label><input class="form-input" id="bank-ifsc" placeholder="e.g. SBIN0001234" style="text-transform:uppercase"></div>
+        <div class="form-group"><label class="form-label">Account Type</label><select class="form-select" id="bank-type"><option>Current</option><option>Savings</option></select></div>
+      </div>
+      <div class="form-group">
+        <div class="toggle-wrap"><label class="toggle"><input type="checkbox" id="bank-primary"><span class="toggle-slider"></span></label><span style="font-size:12px">Set as primary account for settlements</span></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('addBankModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="addBankAccount()">Add Account</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span id="toast-msg">Done!</span></div>
+
+<script src="../js/data.js"></script>
+<script src="../js/components.js"></script>
+<script src="../js/finance.js"></script>
+</body>
+</html>

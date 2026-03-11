@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Shainy Creation – Orders</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/orders.css">
+</head>
+<body>
+<div id="sidebar-container"></div>
+<div class="main">
+  <div id="topbar-container"></div>
+  <div class="page-content">
+
+    <div class="page-header">
+      <h1 class="page-heading">Orders</h1>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-outline btn-sm" onclick="exportCSV()">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export CSV
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="printAllLabels()">
+          <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Print All Labels
+        </button>
+      </div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="order-stats-grid">
+      <div class="mini-stat"><div class="mini-stat-label">All Orders</div><div class="mini-stat-val">342</div></div>
+      <div class="mini-stat orange"><div class="mini-stat-label">Pending</div><div class="mini-stat-val" id="pending-count">24</div></div>
+      <div class="mini-stat green"><div class="mini-stat-label">Delivered</div><div class="mini-stat-val">298</div></div>
+      <div class="mini-stat red"><div class="mini-stat-label">Returned</div><div class="mini-stat-val">20</div></div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-row">
+      <input class="filter-input" placeholder="Search by Order ID, customer…" id="order-search" oninput="filterOrders()">
+      <select class="filter-select" id="order-status-filter" onchange="filterOrders()">
+        <option value="">All Statuses</option>
+        <option>Pending</option><option>Processing</option><option>Shipped</option><option>Delivered</option><option>Returned</option>
+      </select>
+      <select class="filter-select" id="order-sort" onchange="filterOrders()">
+        <option>Newest First</option><option>Oldest First</option><option>Highest Amount</option>
+      </select>
+      <select class="filter-select" id="order-payment" onchange="filterOrders()">
+        <option value="">All Payments</option>
+        <option>Razorpay</option><option>UPI</option><option>COD</option><option>Paytm</option>
+      </select>
+    </div>
+
+    <div class="card" style="padding:0">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="select-all-orders" onchange="selectAllOrders(this)"></th>
+              <th>Order ID</th><th>Customer</th><th>Product</th><th>Amount</th><th>Payment</th><th>Date</th><th>Status</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="orders-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="table-footer">
+      <div id="bulk-order-actions" class="bulk-actions" style="display:none">
+        <button class="btn btn-outline btn-sm" onclick="bulkPrintLabels()">
+          <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print Labels
+        </button>
+        <button class="btn btn-outline btn-sm" onclick="bulkUpdateStatus()">Update Status</button>
+      </div>
+      <span class="text-soft text-sm ml-auto">Showing <span id="orders-showing">1–20</span> of <span id="orders-total">342</span> orders</span>
+      <div style="display:flex;gap:6px" id="orders-pagination"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Order Detail Modal -->
+<div class="modal-overlay" id="orderDetailModal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <div class="modal-title" id="order-modal-title">Order Details</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn btn-outline btn-sm" onclick="printLabel(currentOrderId)">
+          <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print Label
+        </button>
+        <button class="modal-close" onclick="closeModal('orderDetailModal')">×</button>
+      </div>
+    </div>
+    <div class="modal-body" id="order-modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('orderDetailModal')">Close</button>
+      <button class="btn btn-primary" onclick="saveOrder()">Update Order</button>
+    </div>
+  </div>
+</div>
+
+<!-- Label Print Modal -->
+<div class="modal-overlay" id="labelPrintModal">
+  <div class="modal" style="width:min(480px,96vw)">
+    <div class="modal-header">
+      <div class="modal-title">Shipping Label</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn btn-primary btn-sm" onclick="window.print()">
+          <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print
+        </button>
+        <button class="modal-close" onclick="closeModal('labelPrintModal')">×</button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div id="label-content" class="label-sheet"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span id="toast-msg">Done!</span></div>
+
+<script src="../js/data.js"></script>
+<script src="../js/components.js"></script>
+<script src="../js/orders.js"></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Shainy Creation – Content Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/content.css">
+</head>
+<body>
+<div id="sidebar-container"></div>
+<div class="main">
+  <div id="topbar-container"></div>
+  <div class="page-content">
+
+    <div class="page-header">
+      <h1 class="page-heading">Content Library</h1>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-outline btn-sm" onclick="deleteSelected()">
+          <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>Delete Selected
+        </button>
+        <button class="btn btn-primary" onclick="openModal('uploadModal')">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Upload Media
+        </button>
+      </div>
+    </div>
+
+    <!-- Storage Usage -->
+    <div class="storage-bar-card card">
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+        <span style="font-size:12px;font-weight:600">Storage Used</span>
+        <span class="text-soft text-sm">2.4 GB / 10 GB</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:24%"></div></div>
+      <div style="display:flex;gap:16px;margin-top:10px;font-size:11px;color:var(--text-soft)">
+        <span>📷 Images: 1.1 GB</span>
+        <span>🎬 Videos: 1.2 GB</span>
+        <span>📄 Docs: 0.1 GB</span>
+      </div>
+    </div>
+
+    <div class="tab-nav" id="content-tabs">
+      <button class="tab-btn active" data-filter="all">All Files <span class="tab-count" id="tab-all">24</span></button>
+      <button class="tab-btn" data-filter="image">Images <span class="tab-count" id="tab-img">18</span></button>
+      <button class="tab-btn" data-filter="video">Videos <span class="tab-count" id="tab-vid">4</span></button>
+      <button class="tab-btn" data-filter="other">Documents <span class="tab-count" id="tab-doc">2</span></button>
+    </div>
+
+    <div class="filter-row">
+      <input class="filter-input" placeholder="Search files…" id="media-search" oninput="filterMedia()">
+      <select class="filter-select" id="media-sort" onchange="filterMedia()">
+        <option>Newest First</option><option>Oldest First</option><option>Name A-Z</option><option>Size: Largest</option>
+      </select>
+      <div class="view-toggle">
+        <button class="view-btn active" id="view-grid" onclick="setView('grid')">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </button>
+        <button class="view-btn" id="view-list" onclick="setView('list')">
+          <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        </button>
+      </div>
+      <span class="text-soft text-sm ml-auto" id="media-count">24 files</span>
+    </div>
+
+    <div class="card">
+      <div class="media-grid" id="media-grid"></div>
+      <div class="media-list-view" id="media-list" style="display:none">
+        <table>
+          <thead><tr><th><input type="checkbox" id="media-select-all" onchange="selectAllMedia(this)"></th><th>Name</th><th>Type</th><th>Size</th><th>Date</th><th>Used In</th><th>Actions</th></tr></thead>
+          <tbody id="media-list-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Upload Modal -->
+<div class="modal-overlay" id="uploadModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Upload Media</div>
+      <button class="modal-close" onclick="closeModal('uploadModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="upload-zone" id="media-upload-zone" onclick="triggerUpload('media-file-input')">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <p>Drag & drop files here or <strong>browse</strong></p>
+        <p style="font-size:10px;margin-top:4px">Images (PNG, JPG, WebP), Videos (MP4, MOV), PDFs — Max 50MB per file</p>
+      </div>
+      <input type="file" id="media-file-input" multiple style="display:none" onchange="handleMediaUpload(this)">
+      <div id="upload-progress-list" style="margin-top:14px"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('uploadModal')">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- Media Preview Modal -->
+<div class="modal-overlay" id="mediaPreviewModal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <div class="modal-title" id="preview-title">File Preview</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn btn-outline btn-sm" onclick="copyMediaUrl()">Copy URL</button>
+        <button class="modal-close" onclick="closeModal('mediaPreviewModal')">×</button>
+      </div>
+    </div>
+    <div class="modal-body" style="text-align:center" id="preview-body"></div>
+    <div class="modal-footer">
+      <div id="preview-meta" class="text-soft text-sm"></div>
+      <button class="btn btn-danger btn-sm" onclick="deletePreviewFile()">Delete File</button>
+      <button class="btn btn-primary btn-sm" onclick="useInProduct()">Use in Product</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span id="toast-msg">Done!</span></div>
+
+<script src="../js/data.js"></script>
+<script src="../js/components.js"></script>
+<script src="../js/content.js"></script>
+</body>
+</html>

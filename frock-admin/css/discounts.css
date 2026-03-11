@@ -1,0 +1,15 @@
+/* DISCOUNTS.CSS */
+.discount-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+
+.disc-value-large{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500}
+.disc-applied-to{font-size:10px;color:var(--text-soft);margin-top:2px}
+
+/* Discount card (optional card view) */
+.discount-card{background:var(--white);border:1px solid var(--border);padding:18px;position:relative;overflow:hidden;transition:box-shadow var(--transition)}
+.discount-card:hover{box-shadow:var(--shadow-sm)}
+.discount-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--rose)}
+.discount-card.inactive::before{background:var(--border)}
+.discount-card.expired::before{background:var(--badge-red)}
+
+@media(max-width:768px){.discount-stats-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.discount-stats-grid{grid-template-columns:1fr 1fr}}

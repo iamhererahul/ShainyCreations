@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Shainy Creation – Settings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/settings.css">
+</head>
+<body>
+<div id="sidebar-container"></div>
+<div class="main">
+  <div id="topbar-container"></div>
+  <div class="page-content">
+
+    <div class="page-header">
+      <h1 class="page-heading">Settings</h1>
+      <button class="btn btn-primary btn-sm" onclick="saveCurrentTab()">
+        <svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        Save Changes
+      </button>
+    </div>
+
+    <div class="settings-layout">
+      <!-- Side Nav -->
+      <div class="settings-sidenav">
+        <div class="settings-nav-item active" data-tab="general">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          General
+        </div>
+        <div class="settings-nav-item" data-tab="notifications">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          Notifications
+        </div>
+        <div class="settings-nav-item" data-tab="shipping">
+          <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          Shipping
+        </div>
+        <div class="settings-nav-item" data-tab="taxes">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Taxes & GST
+        </div>
+        <div class="settings-nav-item" data-tab="team">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Team Access
+        </div>
+        <div class="settings-nav-item" data-tab="branding">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Branding
+        </div>
+        <div class="settings-nav-item" data-tab="security">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Security
+        </div>
+      </div>
+
+      <!-- Tab Content -->
+      <div class="settings-content">
+
+        <!-- General -->
+        <div class="settings-tab active" id="tab-general">
+          <div class="card-title" style="margin-bottom:20px">General Settings</div>
+          <div class="form-2col">
+            <div class="form-group"><label class="form-label">Store Name</label><input class="form-input" value="Shainy Creation"></div>
+            <div class="form-group"><label class="form-label">Support Email</label><input class="form-input" value="hello@shainycreation.com" type="email"></div>
+            <div class="form-group"><label class="form-label">Phone Number</label><input class="form-input" value="+91 98765 43210"></div>
+            <div class="form-group"><label class="form-label">WhatsApp Number</label><input class="form-input" value="+91 98765 43210"></div>
+            <div class="form-group"><label class="form-label">Currency</label>
+              <select class="form-select"><option selected>INR – ₹ Indian Rupee</option><option>USD – $ US Dollar</option></select>
+            </div>
+            <div class="form-group"><label class="form-label">Timezone</label>
+              <select class="form-select"><option selected>Asia/Kolkata (IST +5:30)</option></select>
+            </div>
+          </div>
+          <div class="form-group"><label class="form-label">Store Address</label><input class="form-input" value="123 Princess Lane, Koramangala, Bengaluru 560034"></div>
+          <div class="form-group"><label class="form-label">Website URL</label><input class="form-input" value="https://www.shainycreation.com"></div>
+          <hr class="divider">
+          <div class="form-group"><label class="form-label" style="margin-bottom:12px">Store Settings</label>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div class="toggle-wrap"><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label><span style="font-size:12px">Enable order confirmation emails</span></div>
+              <div class="toggle-wrap"><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label><span style="font-size:12px">Enable WhatsApp order notifications</span></div>
+              <div class="toggle-wrap"><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label><span style="font-size:12px">Allow guest checkout</span></div>
+              <div class="toggle-wrap"><label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label><span style="font-size:12px">Maintenance mode (hides store from visitors)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notifications -->
+        <div class="settings-tab" id="tab-notifications">
+          <div class="card-title" style="margin-bottom:20px">Notification Preferences</div>
+          <div class="form-group"><label class="form-label">Notification Email</label><input class="form-input" value="alerts@shainycreation.com" type="email"></div>
+          <div class="form-group"><label class="form-label">WhatsApp Alert Number</label><input class="form-input" value="+91 98765 43210"></div>
+          <hr class="divider">
+          <div class="form-group"><label class="form-label" style="margin-bottom:12px">Email Alerts</label>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div class="toggle-wrap"><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label><span style="font-size:12px">New order received</span></div>
+              <div class="toggle-wrap"><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label><span style="font-size:12px">Low stock warnings (below 10 units)</span></div>
+              <div class="toggle-wrap"><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label><span style="font-size:12px">New customer reviews</span></div>
+              <div class="toggle-wrap"><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label><span style="font-size:12px">Payment failures & refund requests</span></div>
+              <div class="toggle-wrap"><label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label><span style="font-size:12px">Daily sales summary report</span></div>
+              <div class="toggle-wrap"><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label><span style="font-size:12px">New franchise / contact submissions</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shipping -->
+        <div class="settings-tab" id="tab-shipping">
+          <div class="card-title" style="margin-bottom:20px">Shipping Configuration</div>
+          <div class="form-2col">
+            <div class="form-group"><label class="form-label">Default Courier</label>
+              <select class="form-select"><option>BlueDart</option><option>Delhivery</option><option>Ecom Express</option><option>DTDC</option><option>Amazon Shipping</option></select>
+            </div>
+            <div class="form-group"><label class="form-label">Free Shipping Above (₹)</label><input class="form-input" type="number" value="999"></div>
+            <div class="form-group"><label class="form-label">Standard Shipping Rate (₹)</label><input class="form-input" type="number" value="49"></div>
+            <div class="form-group"><label class="form-label">Express Shipping Rate (₹)</label><input class="form-input" type="number" value="149"></div>
+            <div class="form-group"><label class="form-label">COD Handling Charge (₹)</label><input class="form-input" type="number" value="49"></div>
+            <div class="form-group"><label class="form-label">Estimated Delivery (days)</label><input class="form-input" type="number" value="5"></div>
+          </div>
+          <div class="toggle-wrap" style="margin-bottom:16px"><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label><span style="font-size:12px">Enable COD nationwide</span></div>
+          <div class="toggle-wrap" style="margin-bottom:16px"><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label><span style="font-size:12px">Send tracking SMS to customer</span></div>
+          <div class="form-group"><label class="form-label">Restricted Pincodes (comma-separated)</label><textarea class="form-textarea" placeholder="Enter restricted pincodes…"></textarea></div>
+        </div>
+
+        <!-- Taxes -->
+        <div class="settings-tab" id="tab-taxes">
+          <div class="card-title" style="margin-bottom:20px">Taxes & GST</div>
+          <div class="form-2col">
+            <div class="form-group"><label class="form-label">GSTIN</label><input class="form-input" value="29AABCS1429B1ZK"></div>
+            <div class="form-group"><label class="form-label">Business Type</label>
+              <select class="form-select"><option>Regular</option><option>Composition</option></select>
+            </div>
+            <div class="form-group"><label class="form-label">State of Registration</label>
+              <select class="form-select"><option selected>Karnataka</option><option>Maharashtra</option><option>Tamil Nadu</option><option>Delhi</option><option>Telangana</option></select>
+            </div>
+            <div class="form-group"><label class="form-label">Default GST Rate</label>
+              <select class="form-select"><option>5%</option><option selected>12%</option><option>18%</option><option>28%</option></select>
+            </div>
+          </div>
+          <div class="toggle-wrap" style="margin-bottom:14px"><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label><span style="font-size:12px">Prices shown inclusive of tax</span></div>
+          <div class="toggle-wrap" style="margin-bottom:14px"><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label><span style="font-size:12px">Show GST breakdown on invoice</span></div>
+          <div class="form-group"><label class="form-label">Invoice Prefix</label><input class="form-input" value="SC-INV-"></div>
+        </div>
+
+        <!-- Team -->
+        <div class="settings-tab" id="tab-team">
+          <div class="card-title" style="margin-bottom:20px">Team Access</div>
+          <div id="team-members-table" style="margin-bottom:20px"></div>
+          <hr class="divider">
+          <div class="card-title" style="font-size:16px;margin-bottom:14px">Invite Team Member</div>
+          <div class="form-2col">
+            <div class="form-group"><label class="form-label">Email Address</label><input class="form-input" id="invite-email" type="email" placeholder="team@example.com"></div>
+            <div class="form-group"><label class="form-label">Name</label><input class="form-input" id="invite-name" placeholder="Full name"></div>
+          </div>
+          <div class="form-group"><label class="form-label">Role & Access Level</label>
+            <select class="form-select" id="invite-role">
+              <option>Manager – Full Access</option>
+              <option>Staff – Orders & Products</option>
+              <option>Support – Orders & Reports</option>
+              <option>View Only</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onclick="sendInvite()">
+            <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Send Invite
+          </button>
+        </div>
+
+        <!-- Branding -->
+        <div class="settings-tab" id="tab-branding">
+          <div class="card-title" style="margin-bottom:20px">Branding & Appearance</div>
+          <div class="form-group">
+            <label class="form-label">Logo</label>
+            <div class="branding-upload" onclick="triggerUpload('logo-upload')">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <p>Upload logo (PNG, SVG recommended)</p>
+            </div>
+            <input type="file" id="logo-upload" accept="image/*" style="display:none" onchange="showToast('✓ Logo uploaded!')">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Favicon</label>
+            <div class="branding-upload small" onclick="triggerUpload('favicon-upload')">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+              <p>Upload favicon (32×32 ICO or PNG)</p>
+            </div>
+            <input type="file" id="favicon-upload" accept="image/*" style="display:none" onchange="showToast('✓ Favicon uploaded!')">
+          </div>
+          <div class="form-2col">
+            <div class="form-group"><label class="form-label">Primary Color</label><input class="form-input" type="color" value="#c8796a" style="height:42px;padding:4px"></div>
+            <div class="form-group"><label class="form-label">Accent Color</label><input class="form-input" type="color" value="#c9a96e" style="height:42px;padding:4px"></div>
+          </div>
+          <div class="form-group"><label class="form-label">Email Footer Text</label><textarea class="form-textarea">Thank you for shopping with Shainy Creation. For support contact hello@shainycreation.com</textarea></div>
+        </div>
+
+        <!-- Security -->
+        <div class="settings-tab" id="tab-security">
+          <div class="card-title" style="margin-bottom:20px">Security Settings</div>
+          <div class="form-group"><label class="form-label">Current Password</label><input class="form-input" type="password" placeholder="Enter current password"></div>
+          <div class="form-2col">
+            <div class="form-group"><label class="form-label">New Password</label><input class="form-input" type="password" placeholder="Min 8 characters"></div>
+            <div class="form-group"><label class="form-label">Confirm New Password</label><input class="form-input" type="password" placeholder="Repeat new password"></div>
+          </div>
+          <button class="btn btn-outline btn-sm" style="margin-bottom:20px" onclick="showToast('✓ Password updated!')">Update Password</button>
+          <hr class="divider">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div class="toggle-wrap"><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label><span style="font-size:12px">Two-factor authentication (2FA)</span></div>
+            <div class="toggle-wrap"><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label><span style="font-size:12px">Login alert emails</span></div>
+            <div class="toggle-wrap"><label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label><span style="font-size:12px">Require password reset every 90 days</span></div>
+          </div>
+          <hr class="divider">
+          <div class="form-group"><label class="form-label">Active Sessions</label>
+            <div class="session-item">
+              <div><strong style="font-size:12px">Chrome on Windows</strong><div class="text-soft text-sm">Bengaluru, India · Current session</div></div>
+              <span class="badge badge-success">Active</span>
+            </div>
+            <div class="session-item">
+              <div><strong style="font-size:12px">Safari on iPhone</strong><div class="text-soft text-sm">Bengaluru, India · 2 hours ago</div></div>
+              <button class="btn btn-danger btn-sm" onclick="showToast('✓ Session revoked')">Revoke</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span id="toast-msg">Done!</span></div>
+
+<script src="../js/data.js"></script>
+<script src="../js/components.js"></script>
+<script src="../js/settings.js"></script>
+</body>
+</html>
