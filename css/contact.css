@@ -1,0 +1,21 @@
+/* contact.css – Contact Page */
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.contact-info h2{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:400;margin-bottom:16px}
+.contact-info p{font-size:13px;color:var(--text-soft);line-height:1.8;margin-bottom:28px}
+.contact-detail{display:flex;gap:16px;margin-bottom:24px;align-items:flex-start}
+.contact-detail-icon{width:44px;height:44px;background:var(--blush);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-detail-icon svg{width:18px;height:18px;stroke:var(--rose);fill:none}
+.contact-detail-text h4{font-size:12px;font-weight:600;margin-bottom:3px;letter-spacing:.06em}
+.contact-detail-text p{font-size:12px;color:var(--text-soft);line-height:1.6}
+.contact-form-card{background:var(--off-white);border:1px solid var(--border);padding:36px}
+.contact-form-card h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;margin-bottom:24px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.map-section{margin-top:0;background:var(--blush);padding:40px 48px;text-align:center}
+.map-placeholder{height:300px;background:linear-gradient(135deg,var(--blush-mid),var(--blush-deep));display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text-soft);letter-spacing:.08em;border:1px solid var(--border)}
+.faq-item{padding:18px 0;border-bottom:1px solid var(--border);cursor:pointer}
+.faq-question{display:flex;justify-content:space-between;align-items:center;font-weight:500;font-size:13px}
+.faq-question svg{width:16px;height:16px;stroke:var(--text-soft);fill:none;transition:transform var(--transition)}
+.faq-item.open .faq-question svg{transform:rotate(180deg)}
+.faq-answer{font-size:12px;color:var(--text-soft);line-height:1.8;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}
+.faq-item.open .faq-answer{max-height:200px;padding-top:12px}
+@media(max-width:768px){.contact-layout{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}}

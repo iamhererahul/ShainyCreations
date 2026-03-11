@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Shainy Creation – Little Princess, Timeless Elegance. Designer frocks for girls age 0-14.">
+<title>Home – Shainy Creation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/index.css">
+
+</head>
+<body>
+
+  <div class="top-bar">
+    <span>FREE SHIPPING ABOVE ₹1500</span>
+    <span>✦</span>
+    <span>COD AVAILABLE</span>
+    <span>✦</span>
+    <span>USE CODE <b>PRINCESS10</b> FOR 10% OFF</span>
+  </div>
+  <nav class="site-nav">
+    <div class="nav-left"><a href="index.html" class=active>Shop</a><a href="shop.html" >New Arrivals</a><a href="best-sellers.html" >Best Sellers</a></div>
+    <a href="index.html" class="logo">Shainy Creation<span>Since 2018</span></a>
+    <div class="nav-right">
+      <div class="nav-right-links">
+        <a href="about.html" >About</a>
+        <a href="contact.html" >Contact</a>
+      </div>
+      <div class="nav-icons">
+        <button class="nav-icon-btn search-trigger" title="Search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <button class="nav-icon-btn" onclick="window.location='account.html#wishlist'" title="Wishlist" style="position:relative">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="wishlist-badge" style="display:none">0</span>
+        </button>
+        <button class="nav-icon-btn" onclick="window.location='cart.html'" title="Cart" style="position:relative">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-badge" style="display:none">0</span>
+        </button>
+        <!-- Profile dropdown -->
+        <div class="profile-dropdown-wrap">
+          <button class="nav-icon-btn profile-btn" title="My Account">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </button>
+          <div class="profile-dropdown">
+            <div class="profile-dropdown-header">
+              <div class="profile-avatar-sm">P</div>
+              <div><div class="profile-dname">Priya Mehta</div><div class="profile-demail">priya@email.com</div></div>
+            </div>
+            <a href="account.html#profile" class="profile-dd-link">
+              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Profile Settings
+            </a>
+            <a href="account.html#orders" class="profile-dd-link">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              My Orders
+            </a>
+            <a href="account.html#wishlist" class="profile-dd-link">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              Wishlist
+            </a>
+            <a href="track-order.html" class="profile-dd-link">
+              <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              Track Order
+            </a>
+            <div class="profile-dd-divider"></div>
+            <a href="#" class="profile-dd-link profile-dd-signout">
+              <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Sign Out
+            </a>
+          </div>
+        </div>
+      </div>
+      <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <!-- Search overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <div class="search-box">
+      <input class="search-input" id="searchInput" placeholder="Search for frocks, occasions, age groups…" autocomplete="off">
+      <button class="search-close" id="searchClose">×</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+  <!-- Mobile Nav -->
+  <div class="mobile-nav">
+    <div class="mobile-nav-overlay"></div>
+    <div class="mobile-nav-drawer">
+      <button class="mobile-nav-close">×</button>
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop All</a>
+      <a href="best-sellers.html">Best Sellers</a>
+      <a href="about.html">About Brand</a>
+      <a href="bulk-order.html">Bulk Order</a>
+      <a href="franchise.html">Franchise</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="account.html">My Account</a>
+      <a href="cart.html">Cart</a>
+    </div>
+  </div>
+
+  <div class="shipping-banner">
+    <span>🚚 Free shipping on orders above ₹1,500</span>
+    <span>✦</span>
+    <span>✨ Cash on Delivery available</span>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content reveal">
+      <div class="hero-breadcrumb">Home / Summer 2024</div>
+      <h1 class="hero-title">Little Princess,<em>Timeless Elegance</em></h1>
+      <p class="hero-sub">Handcrafted designer frocks for your little one. Internationally famous elegant designs, age 0–14 years.</p>
+      <a href="shop.html" class="btn btn-dark">
+        Shop the Collection
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="hero-image">
+      <div class="hero-dress"></div>
+    </div>
+  </section>
+
+  <!-- SHOP BY AGE -->
+  <section class="section-pad bg-off-white">
+    <div class="section-heading reveal"><h2>Shop by Age</h2><p>Find the perfect frock for every stage.</p></div>
+    <div class="age-circles">
+      <div class="age-item reveal reveal-delay-1" onclick="window.location='shop.html?age=0-1'"><div class="age-circle">0-1</div><div class="age-label">0–1 Years</div></div>
+      <div class="age-item reveal reveal-delay-2" onclick="window.location='shop.html?age=1-3'"><div class="age-circle">1-3</div><div class="age-label">1–3 Years</div></div>
+      <div class="age-item reveal reveal-delay-3" onclick="window.location='shop.html?age=3-6'"><div class="age-circle">3-6</div><div class="age-label">3–6 Years</div></div>
+      <div class="age-item reveal reveal-delay-4" onclick="window.location='shop.html?age=6-10'"><div class="age-circle">6-10</div><div class="age-label">6–10 Years</div></div>
+      <div class="age-item reveal" style="transition-delay:.5s" onclick="window.location='shop.html?age=10-14'"><div class="age-circle">10-14</div><div class="age-label">10–14 Years</div></div>
+    </div>
+  </section>
+
+  <!-- FEATURED COLLECTION -->
+  <section class="section-pad bg-white">
+    <div class="featured-header">
+      <div class="reveal"><h2>Featured Collection</h2><p>Our best pieces for the season.</p></div>
+      <a href="shop.html" class="view-all">View All →</a>
+    </div>
+    <div class="products-grid-3" id="featured-grid"></div>
+  </section>
+
+  <!-- PREMIUM BANNER -->
+  <div class="premium-banner reveal">
+    <h2>Premium Collection</h2>
+    <p>Exclusive princess dressing and special-occasion elegance.</p>
+    <a href="shop.html?collection=premium" class="btn btn-outline-white">Explore Now</a>
+  </div>
+
+  <!-- BEST SELLERS – Auto-scroll Carousel -->
+  <section class="section-pad bg-white" id="bestsellers-section">
+    <div class="bestsellers-header">
+      <div class="reveal"><h2 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400">Best Sellers</h2><p style="font-size:12px;color:var(--text-soft);margin-top:4px">Most loved by our customers.</p></div>
+      <div class="arrow-btns">
+        <button class="arrow-btn bs-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <button class="arrow-btn bs-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+    </div>
+    <div class="carousel-wrap" id="bsCarouselWrap">
+      <div class="carousel-track" id="bsCarouselTrack"></div>
+    </div>
+    <div class="carousel-nav" id="bsCarouselDots"></div>
+    <div style="text-align:center;margin-top:24px"><a href="best-sellers.html" class="view-all">View All Best Sellers →</a></div>
+  </section>
+
+  <!-- SHOP BY BUDGET -->
+  <section class="section-pad bg-blush">
+    <div class="section-heading reveal"><h2>Shop by Budget</h2><p>Beautiful frocks at every price point.</p></div>
+    <div class="budget-grid">
+      <button class="budget-btn reveal reveal-delay-1" onclick="window.location='shop.html?budget=under1500'">Under ₹1,500</button>
+      <button class="budget-btn reveal reveal-delay-2" onclick="window.location='shop.html?budget=1500-3000'">₹1,500 – ₹3,000</button>
+      <button class="budget-btn reveal reveal-delay-3" onclick="window.location='shop.html?budget=3000-5000'">₹3,000 – ₹5,000</button>
+      <button class="budget-btn reveal reveal-delay-4" onclick="window.location='shop.html?budget=over5000'">Premium Above ₹5,000</button>
+    </div>
+  </section>
+
+  <!-- WHY SHAINY -->
+  <section class="section-pad bg-white">
+    <div class="section-heading reveal"><h2>Why Shainy Creation</h2></div>
+    <div class="why-grid">
+      <div class="reveal reveal-delay-1"><div class="why-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div class="why-title">Premium Fabrics</div><div class="why-desc">Only the finest materials chosen to comfort your little one.</div></div>
+      <div class="reveal reveal-delay-2"><div class="why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div><div class="why-title">Designer Cuts</div><div class="why-desc">Internationally trained designers crafting exclusive styles.</div></div>
+      <div class="reveal reveal-delay-3"><div class="why-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg></div><div class="why-title">Limited Editions</div><div class="why-desc">Exclusive collections so your princess always looks unique.</div></div>
+      <div class="reveal reveal-delay-4"><div class="why-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="why-title">Fast Delivery</div><div class="why-desc">Express shipping options, packed with love and care.</div></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section-pad bg-blush">
+    <div class="section-heading reveal"><h2>Words from Our Families</h2></div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal reveal-delay-1"><div class="stars">★★★★★</div><p class="testimonial-text">"My daughter refused to take off her Rosabay frock. The fabric is so soft and the details are exquisite!"</p><div class="testimonial-author">Priya Mehta</div><div class="testimonial-location">Mumbai</div></div>
+      <div class="testimonial-card reveal reveal-delay-2"><div class="stars">★★★★★</div><p class="testimonial-text">"Ordered for my daughter's birthday. She looked like a real princess! The packaging was beautiful too."</p><div class="testimonial-author">Aayushi Sharma</div><div class="testimonial-location">Bengaluru</div></div>
+      <div class="testimonial-card reveal reveal-delay-3"><div class="stars">★★★★★</div><p class="testimonial-text">"Unmatched craftsmanship. Fast delivery, gorgeous packaging, and absolutely perfect quality every time."</p><div class="testimonial-author">Kavitha Reddy</div><div class="testimonial-location">Hyderabad</div></div>
+    </div>
+  </section>
+
+  <!-- JOIN -->
+  <section class="section-pad bg-off-white" style="text-align:center">
+    <div class="section-heading reveal"><h2>Join the Royal Circle</h2><p>Be the first to know about new collections, exclusive offers, and styling tips.</p></div>
+    <form class="email-form reveal">
+      <input type="email" class="email-input" placeholder="Your email address">
+      <button type="submit" class="subscribe-btn">Subscribe</button>
+    </form>
+  </section>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!window.PRODUCTS) return;
+    // Featured grid (first 6)
+    const fg = document.getElementById('featured-grid');
+    if (fg) fg.innerHTML = PRODUCTS.slice(0,6).map(p => productCardHTML(p,'product-img-h280')).join('');
+    // Best sellers carousel
+    const bsTrack = document.getElementById('bsCarouselTrack');
+    if (bsTrack) {
+      const bsList = PRODUCTS.filter(p => p.bestseller);
+      bsTrack.innerHTML = bsList.map(p => productCardHTML(p,'product-img-h220')).join('');
+      initCarousel('#bsCarouselWrap','#bsCarouselTrack','#bsCarouselDots',3500);
+    }
+    if (window.syncWishlistButtons) syncWishlistButtons();
+  });
+  </script>
+
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">Shainy Creation<span>Since 2018</span></a>
+        <p class="footer-desc">Little Princess, Timeless Elegance. Handcrafted designer frocks for your little one, age 0–14 years.</p>
+        <div class="social-links">
+          <a href="#" class="social-link"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" class="social-link"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" class="social-link"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="shop.html">All Frocks</a>
+        <a href="best-sellers.html">Best Sellers</a>
+        <a href="shop.html">New Arrivals</a>
+        <a href="bulk-order.html">Bulk Orders</a>
+        <a href="franchise.html">Franchise</a>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <a href="track-order.html">Track Order</a>
+        <a href="faq.html">FAQ &amp; Returns</a>
+        <a href="contact.html">Shipping Policy</a>
+        <a href="faq.html">Size Guide</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About Brand</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="franchise.html">Franchise</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Shainy Creation. All rights reserved.</span>
+      <span>Made with ♥ for little princesses everywhere.</span>
+    </div>
+  </footer>
+<script src="js/products.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/cart.js" defer></script>
+</body>
+</html>

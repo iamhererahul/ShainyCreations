@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Shainy Creation – Little Princess, Timeless Elegance. Designer frocks for girls age 0-14.">
+<title>Bulk Order – Shainy Creation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+  <div class="top-bar">
+    <span>FREE SHIPPING ABOVE ₹1500</span>
+    <span>✦</span>
+    <span>COD AVAILABLE</span>
+    <span>✦</span>
+    <span>USE CODE <b>PRINCESS10</b> FOR 10% OFF</span>
+  </div>
+  <nav class="site-nav">
+    <div class="nav-left"><a href="index.html" >Shop</a><a href="shop.html" >New Arrivals</a><a href="best-sellers.html" >Best Sellers</a></div>
+    <a href="index.html" class="logo">Shainy Creation<span>Since 2018</span></a>
+    <div class="nav-right">
+      <div class="nav-right-links">
+        <a href="about.html" >About</a>
+        <a href="contact.html" >Contact</a>
+      </div>
+      <div class="nav-icons">
+        <button class="nav-icon-btn search-trigger" title="Search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <button class="nav-icon-btn" onclick="window.location='account.html#wishlist'" title="Wishlist" style="position:relative">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="wishlist-badge" style="display:none">0</span>
+        </button>
+        <button class="nav-icon-btn" onclick="window.location='cart.html'" title="Cart" style="position:relative">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-badge" style="display:none">0</span>
+        </button>
+        <!-- Profile dropdown -->
+        <div class="profile-dropdown-wrap">
+          <button class="nav-icon-btn profile-btn" title="My Account">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </button>
+          <div class="profile-dropdown">
+            <div class="profile-dropdown-header">
+              <div class="profile-avatar-sm">P</div>
+              <div><div class="profile-dname">Priya Mehta</div><div class="profile-demail">priya@email.com</div></div>
+            </div>
+            <a href="account.html#profile" class="profile-dd-link">
+              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Profile Settings
+            </a>
+            <a href="account.html#orders" class="profile-dd-link">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              My Orders
+            </a>
+            <a href="account.html#wishlist" class="profile-dd-link">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              Wishlist
+            </a>
+            <a href="track-order.html" class="profile-dd-link">
+              <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              Track Order
+            </a>
+            <div class="profile-dd-divider"></div>
+            <a href="#" class="profile-dd-link profile-dd-signout">
+              <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Sign Out
+            </a>
+          </div>
+        </div>
+      </div>
+      <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <!-- Search overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <div class="search-box">
+      <input class="search-input" id="searchInput" placeholder="Search for frocks, occasions, age groups…" autocomplete="off">
+      <button class="search-close" id="searchClose">×</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+  <!-- Mobile Nav -->
+  <div class="mobile-nav">
+    <div class="mobile-nav-overlay"></div>
+    <div class="mobile-nav-drawer">
+      <button class="mobile-nav-close">×</button>
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop All</a>
+      <a href="best-sellers.html">Best Sellers</a>
+      <a href="about.html">About Brand</a>
+      <a href="bulk-order.html">Bulk Order</a>
+      <a href="franchise.html">Franchise</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="account.html">My Account</a>
+      <a href="cart.html">Cart</a>
+    </div>
+  </div>
+
+  <div class="hero-page">
+    <h1>Bulk Order <em>Programme</em></h1>
+    <p>Perfect for schools, dance academies, event planners, boutiques & retailers. Exclusive pricing on orders of 10+ pieces.</p>
+  </div>
+
+  <section class="section-pad bg-white">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px">
+      <div class="highlight-card reveal">
+        <div class="highlight-card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>10–49 Pieces</h3>
+        <p>10% off the listed price + priority dispatch within 5–7 business days with dedicated support.</p>
+      </div>
+      <div class="highlight-card reveal reveal-delay-1">
+        <div class="highlight-card-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <h3>50–99 Pieces</h3>
+        <p>18% off + custom embroidery / label available + free shipping anywhere in India.</p>
+      </div>
+      <div class="highlight-card reveal reveal-delay-2">
+        <div class="highlight-card-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <h3>100+ Pieces</h3>
+        <p>25% off + fully custom designs + dedicated account manager + NET-30 payment terms.</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start">
+      <div class="reveal">
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:400;margin-bottom:16px">Who Orders in Bulk?</h2>
+        <ul style="list-style:none;font-size:13px;color:var(--text-soft);line-height:2">
+          <li>✦ Dance academies & choreographers</li>
+          <li>✦ School & college annual functions</li>
+          <li>✦ Wedding & event management companies</li>
+          <li>✦ Children's boutiques & resellers</li>
+          <li>✦ NGOs & charitable organisations</li>
+          <li>✦ Photography studios</li>
+        </ul>
+        <div style="background:var(--blush);padding:20px;margin-top:24px;border-left:3px solid var(--rose)">
+          <p style="font-size:13px;font-style:italic;color:var(--text-soft)">"We ordered 80 frocks for our annual day. The quality was stunning and delivery was perfectly on time. Shainy Creation is our go-to for every event now."</p>
+          <p style="font-size:12px;font-weight:600;margin-top:8px">— Sunita Krishnamurthy, Harmony Dance Academy, Chennai</p>
+        </div>
+      </div>
+      <div class="form-card reveal reveal-delay-1">
+        <h2>Request a Bulk Quote</h2>
+        <p class="subtitle">Fill in the form and our team will reach out within 24 hours.</p>
+        <form onsubmit="event.preventDefault(); window.showToast && window.showToast('✓ Quote request sent! We'll reach out within 24 hrs.')">
+          <div class="form-2col">
+            <div class="form-group"><label class="form-label">Name</label><input class="form-input" placeholder="Your name"></div>
+            <div class="form-group"><label class="form-label">Organisation</label><input class="form-input" placeholder="Company / School name"></div>
+          </div>
+          <div class="form-2col">
+            <div class="form-group"><label class="form-label">Phone</label><input class="form-input" type="tel" placeholder="+91 98765 43210"></div>
+            <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="you@email.com"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Product(s) Interested In</label>
+            <input class="form-input" placeholder="e.g. Rosabay Belle Frock, Lavender Dream Tutu">
+          </div>
+          <div class="form-2col">
+            <div class="form-group"><label class="form-label">Quantity</label><input class="form-input" type="number" placeholder="e.g. 50" min="10"></div>
+            <div class="form-group"><label class="form-label">Required By</label><input class="form-input" type="date"></div>
+          </div>
+          <div class="form-group"><label class="form-label">Special Requirements</label><textarea class="form-textarea" style="min-height:80px" placeholder="Custom colours, embroidery, sizes…"></textarea></div>
+          <button type="submit" class="btn btn-dark btn-block">Send Quote Request</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">Shainy Creation<span>Since 2018</span></a>
+        <p class="footer-desc">Little Princess, Timeless Elegance. Handcrafted designer frocks for your little one, age 0–14 years.</p>
+        <div class="social-links">
+          <a href="#" class="social-link"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" class="social-link"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" class="social-link"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="shop.html">All Frocks</a>
+        <a href="best-sellers.html">Best Sellers</a>
+        <a href="shop.html">New Arrivals</a>
+        <a href="bulk-order.html">Bulk Orders</a>
+        <a href="franchise.html">Franchise</a>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <a href="track-order.html">Track Order</a>
+        <a href="faq.html">FAQ &amp; Returns</a>
+        <a href="contact.html">Shipping Policy</a>
+        <a href="faq.html">Size Guide</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About Brand</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="franchise.html">Franchise</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Shainy Creation. All rights reserved.</span>
+      <span>Made with ♥ for little princesses everywhere.</span>
+    </div>
+  </footer>
+<script src="js/main.js" defer></script>
+</body>
+</html>

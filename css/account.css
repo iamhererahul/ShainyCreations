@@ -1,0 +1,28 @@
+/* account.css – Account Page */
+.account-layout{display:grid;grid-template-columns:240px 1fr;gap:36px;align-items:start}
+.account-sidebar{background:var(--off-white);border:1px solid var(--border);padding:24px;position:sticky;top:80px}
+.account-avatar{width:64px;height:64px;background:var(--blush);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--rose)}
+.account-name{text-align:center;font-weight:600;font-size:14px;margin-bottom:4px}
+.account-email{text-align:center;font-size:11px;color:var(--text-soft);margin-bottom:20px}
+.account-nav a{display:flex;align-items:center;gap:10px;padding:11px 14px;font-size:12px;letter-spacing:.06em;color:var(--text-soft);transition:all var(--transition);border-left:2px solid transparent}
+.account-nav a:hover,.account-nav a.active{color:var(--rose);border-left-color:var(--rose);background:rgba(200,121,106,.06)}
+.account-nav a svg{width:15px;height:15px;stroke:currentColor;fill:none}
+.account-panel{display:none}.account-panel.active{display:block}
+.account-panel h2{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;margin-bottom:6px}
+.account-panel .subtitle{font-size:12px;color:var(--text-soft);margin-bottom:28px}
+.orders-table{width:100%;border-collapse:collapse;font-size:12px}
+.orders-table th{text-align:left;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-soft);padding:10px 14px;border-bottom:2px solid var(--border)}
+.orders-table td{padding:14px;border-bottom:1px solid var(--border);vertical-align:middle}
+.order-status{display:inline-block;padding:3px 10px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.status-delivered{background:rgba(80,160,100,.12);color:#4a9060}
+.status-shipped{background:rgba(200,165,80,.12);color:#a08020}
+.status-processing{background:rgba(80,120,200,.12);color:#4060a0}
+.wishlist-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.address-card{border:1px solid var(--border);padding:20px;font-size:13px;line-height:1.8;color:var(--text-soft);position:relative}
+.address-card h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px}
+.address-card .default-badge{position:absolute;top:12px;right:12px;background:var(--blush);padding:2px 8px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--rose-dark)}
+.address-actions{display:flex;gap:12px;margin-top:14px}
+.address-actions button{background:none;border:none;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-soft);cursor:pointer;transition:color var(--transition)}
+.address-actions button:hover{color:var(--rose)}
+@media(max-width:900px){.account-layout{grid-template-columns:1fr}.account-sidebar{position:static}.wishlist-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.wishlist-grid{grid-template-columns:1fr}}

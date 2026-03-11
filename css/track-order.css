@@ -1,0 +1,23 @@
+/* track-order.css – Track Order Page */
+.track-card{max-width:680px;margin:0 auto;background:var(--off-white);border:1px solid var(--border);padding:40px}
+.track-form-row{display:grid;grid-template-columns:1fr auto;gap:0;margin-bottom:36px}
+.track-input{padding:13px 18px;border:1px solid var(--border);border-right:none;font-family:'Jost',sans-serif;font-size:13px;outline:none;background:var(--white);flex:1}
+.track-input:focus{border-color:var(--rose)}
+.track-result{margin-top:32px;border-top:1px solid var(--border);padding-top:32px}
+.order-info-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.order-id{font-family:'Cormorant Garamond',serif;font-size:20px}
+.tracking-steps{position:relative;padding-left:24px}
+.tracking-steps::before{content:'';position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--border)}
+.tracking-step{position:relative;padding:0 0 28px 28px;display:flex;gap:16px}
+.tracking-step:last-child{padding-bottom:0}
+.step-dot{position:absolute;left:-24px;top:4px;width:16px;height:16px;border-radius:50%;border:2px solid var(--border);background:var(--white);z-index:1;transition:all var(--transition)}
+.tracking-step.completed .step-dot{background:var(--rose);border-color:var(--rose)}
+.tracking-step.active .step-dot{background:var(--white);border-color:var(--rose);box-shadow:0 0 0 4px rgba(200,121,106,.2)}
+.step-content h4{font-size:13px;font-weight:600;margin-bottom:3px}
+.step-content p{font-size:11px;color:var(--text-soft)}
+.step-date{font-size:11px;color:var(--text-soft);white-space:nowrap}
+.estimated-delivery{background:var(--blush);padding:16px 20px;display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.estimated-delivery svg{width:20px;height:20px;stroke:var(--rose);fill:none;flex-shrink:0}
+.estimated-delivery h4{font-size:12px;font-weight:600;margin-bottom:2px}
+.estimated-delivery p{font-size:12px;color:var(--text-soft)}
+@media(max-width:600px){.track-form-row{grid-template-columns:1fr}.track-input{border-right:1px solid var(--border);border-bottom:none}}
