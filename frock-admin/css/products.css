@@ -1,15 +1,63 @@
 /* PRODUCTS.CSS */
-.product-img-cell{display:flex;align-items:center;gap:10px}
-.product-name-cell .product-name{font-weight:600}
-.product-name-cell .product-age{font-size:10px;color:var(--text-soft);margin-top:1px}
-.stock-low{color:var(--orange);font-weight:600}
-.stock-out{color:var(--badge-red);font-weight:600}
-.stock-ok{color:var(--green);font-weight:600}
-.price-original{font-size:10px;color:var(--text-soft);text-decoration:line-through;margin-top:2px}
-.product-actions{display:flex;gap:4px;align-items:center}
+.product-img-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.product-name-cell .product-name {
+  font-weight: 600;
+}
+.product-name-cell .product-age {
+  font-size: 10px;
+  color: var(--text-soft);
+  margin-top: 1px;
+}
+.stock-low {
+  color: var(--orange);
+  font-weight: 600;
+}
+.stock-out {
+  color: var(--badge-red);
+  font-weight: 600;
+}
+.stock-ok {
+  color: var(--green);
+  font-weight: 600;
+}
+.price-original {
+  font-size: 10px;
+  color: var(--text-soft);
+  text-decoration: line-through;
+  margin-top: 2px;
+}
+.product-actions {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
 
 /* Product form specifics */
-.branding-upload{border:2px dashed var(--border);padding:20px;text-align:center;cursor:pointer;transition:all var(--transition);background:var(--off-white);margin-top:6px}
-.branding-upload:hover{border-color:var(--rose);background:var(--blush)}
-.branding-upload svg{width:24px;height:24px;stroke:var(--text-soft);fill:none;margin:0 auto 8px}
-.branding-upload p{font-size:11px;color:var(--text-soft)}
+.branding-upload {
+  border: 2px dashed var(--border);
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  background: var(--off-white);
+  margin-top: 6px;
+}
+.branding-upload:hover {
+  border-color: var(--rose);
+  background: var(--blush);
+}
+.branding-upload svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--text-soft);
+  fill: none;
+  margin: 0 auto 8px;
+}
+.branding-upload p {
+  font-size: 11px;
+  color: var(--text-soft);
+}
