@@ -1,3 +1,28 @@
+<?php
+include "../config.php";
+
+$franchise_data = [];
+
+$query = "SELECT * FROM franchise_applications ORDER BY id DESC";
+$result = mysqli_query($conn,$query);
+
+while($row = mysqli_fetch_assoc($result)){
+
+$franchise_data[] = [
+"id" => $row['id'],
+"name" => $row['full_name'],
+"email" => $row['email'],
+"phone" => $row['phone'],
+"city" => $row['city'],
+"investBudget" => $row['space_available'],
+"experience" => $row['business_background'],
+"message" => $row['business_background'],
+"status" => $row['status'],
+"date" => $row['created_at']
+];
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,7 +95,12 @@
 
 <div class="toast" id="toast"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span id="toast-msg">Done!</span></div>
 
-<script src="../js/data.js"></script>
+<!-- <script src="../js/data.js"></script> -->
+ <script>
+
+const SC_FRANCHISE = <?php echo json_encode($franchise_data); ?>;
+
+</script>
 <script src="../js/components.js"></script>
 <script src="../js/franchise.js"></script>
 </body>
