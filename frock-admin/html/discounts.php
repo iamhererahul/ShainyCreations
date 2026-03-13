@@ -26,7 +26,9 @@ header("Location: discounts.php");
 exit();
 }
 
-/* DELETE */
+
+/* DELETE DISCOUNT */
+
 if(isset($_GET['delete'])){
 
 $code = mysqli_real_escape_string($conn,$_GET['delete']);
@@ -36,6 +38,26 @@ mysqli_query($conn,"DELETE FROM discounts WHERE code='$code'");
 header("Location: discounts.php");
 exit();
 }
+
+
+/* TOGGLE STATUS */
+
+if(isset($_GET['toggle'])){
+
+$code = mysqli_real_escape_string($conn,$_GET['toggle']);
+
+$q = mysqli_query($conn,"SELECT status FROM discounts WHERE code='$code'");
+$row = mysqli_fetch_assoc($q);
+
+$new_status = $row['status']=="Active" ? "Inactive" : "Active";
+
+mysqli_query($conn,"UPDATE discounts SET status='$new_status' WHERE code='$code'");
+
+header("Location: discounts.php");
+exit();
+}
+
+
 /* FETCH DISCOUNTS */
 
 $discounts = [];
@@ -59,32 +81,26 @@ $discounts[] = [
 ];
 
 }
+
+
 /* STATS */
 
-$total = mysqli_fetch_assoc(mysqli_query($conn,"SELECT COUNT(*) as t FROM discounts"))['t'];
+$total = mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT COUNT(*) as t FROM discounts")
+)['t'] ?? 0;
 
-$active = mysqli_fetch_assoc(mysqli_query($conn,"SELECT COUNT(*) as t FROM discounts WHERE status='Active'"))['t'];
+$active = mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT COUNT(*) as t FROM discounts WHERE LOWER(status)='active'")
+)['t'] ?? 0;
 
-$inactive = mysqli_fetch_assoc(mysqli_query($conn,"SELECT COUNT(*) as t FROM discounts WHERE status='inactive'"))['t'];
+$inactive = mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT COUNT(*) as t FROM discounts WHERE LOWER(status)='inactive'")
+)['t'] ?? 0;
 
-$uses = mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(used_count) as t FROM discounts"))['t'];
+$uses = mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT IFNULL(SUM(used_count),0) as t FROM discounts")
+)['t'] ?? 0;
 
-/* TOGGLE STATUS */
-
-if(isset($_GET['toggle'])){
-
-$code = mysqli_real_escape_string($conn,$_GET['toggle']);
-
-$q = mysqli_query($conn,"SELECT status FROM discounts WHERE code='$code'");
-$row = mysqli_fetch_assoc($q);
-
-$new = $row['status']=="Active" ? "Inactive" : "Active";
-
-mysqli_query($conn,"UPDATE discounts SET status='$new' WHERE code='$code'");
-
-header("Location: discounts.php");
-exit();
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -139,7 +155,7 @@ Create Discount
 </div>
 
 <div class="mini-stat red">
-<div class="mini-stat-label">Expired</div>
+<div class="mini-stat-label">Inactive</div>
 <div class="mini-stat-val" id="disc-expired"><?php echo $inactive; ?></div>
 </div>
 

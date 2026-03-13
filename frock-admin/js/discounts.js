@@ -61,12 +61,17 @@ function renderDiscounts() {
   if (status) list = list.filter((d) => d._effStatus === status);
 
   /* Stats */
+
   document.getElementById("disc-total").textContent = SC_DISCOUNTS.length;
-  document.getElementById("disc-active-count").textContent =
-    SC_DISCOUNTS.filter((d) => d.active).length;
-  document.getElementById("disc-expired").textContent = SC_DISCOUNTS.filter(
-    (d) => d.end && new Date(d.end) < today,
-  ).length;
+
+  const activeCount = SC_DISCOUNTS.filter((d) => d.active).length;
+
+  const inactiveCount = SC_DISCOUNTS.filter((d) => !d.active).length;
+
+  document.getElementById("disc-active-count").textContent = activeCount;
+
+  document.getElementById("disc-expired").textContent = inactiveCount;
+
   document.getElementById("disc-uses").textContent = SC_DISCOUNTS.reduce(
     (a, b) => a + b.uses,
     0,
