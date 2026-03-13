@@ -1,36 +1,180 @@
 /* CONTACT.CSS */
-.contact-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.contact-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
 
-.contact-layout{display:grid;grid-template-columns:360px 1fr;gap:16px;align-items:start}
-.contact-list{padding:0;margin-bottom:0;overflow:hidden}
-.contact-detail{padding:0;margin-bottom:0;min-height:480px}
+.contact-layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.contact-list {
+  padding: 0;
+  margin-bottom: 0;
+  overflow: hidden;
+}
+.contact-detail {
+  padding: 0;
+  margin-bottom: 0;
+  min-height: 480px;
+}
 
 /* Message list */
-.contact-list-item{padding:14px 18px;border-bottom:1px solid var(--border);cursor:pointer;transition:background var(--transition);position:relative}
-.contact-list-item:hover{background:var(--off-white)}
-.contact-list-item.active{background:var(--blush);border-left:3px solid var(--rose)}
-.contact-list-item.unread .contact-item-name{font-weight:700}
-.contact-list-item.unread::after{content:'';position:absolute;top:50%;right:14px;transform:translateY(-50%);width:8px;height:8px;border-radius:50%;background:var(--rose)}
-.contact-item-row{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
-.contact-item-name{font-size:13px;font-weight:500}
-.contact-item-time{font-size:10px;color:var(--text-soft);white-space:nowrap;flex-shrink:0}
-.contact-item-subject{font-size:11px;color:var(--text-soft);margin-top:2px}
-.contact-item-preview{font-size:11px;color:var(--text-soft);margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.contact-list-item {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background var(--transition);
+  position: relative;
+}
+.contact-list-item:hover {
+  background: var(--off-white);
+}
+.contact-list-item.active {
+  background: var(--blush);
+  border-left: 3px solid var(--rose);
+}
+.contact-list-item.unread .contact-item-name {
+  font-weight: 700;
+}
+.contact-list-item.unread::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rose);
+}
+.contact-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+.contact-item-name {
+  font-size: 13px;
+  font-weight: 500;
+}
+.contact-item-time {
+  font-size: 10px;
+  color: var(--text-soft);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.contact-item-subject {
+  font-size: 11px;
+  color: var(--text-soft);
+  margin-top: 2px;
+}
+.contact-item-preview {
+  font-size: 11px;
+  color: var(--text-soft);
+  margin-top: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 /* Message detail */
-.contact-detail-header{padding:20px;border-bottom:1px solid var(--border)}
-.contact-detail-name{font-size:16px;font-weight:600;margin-bottom:4px}
-.contact-detail-meta{font-size:11px;color:var(--text-soft);display:flex;gap:12px;flex-wrap:wrap}
-.contact-detail-meta span{display:flex;align-items:center;gap:4px}
-.contact-detail-meta svg{width:11px;height:11px;stroke:currentColor;fill:none}
-.contact-detail-subject{font-size:13px;font-weight:600;padding:14px 20px;background:var(--off-white);border-bottom:1px solid var(--border)}
-.contact-detail-body{padding:20px;font-size:13px;line-height:1.8;color:var(--text)}
-.contact-reply-area{padding:16px 20px;border-top:1px solid var(--border);background:var(--off-white)}
-.contact-reply-area textarea{width:100%;padding:10px 14px;border:1px solid var(--border);background:var(--white);font-family:'Jost',sans-serif;font-size:13px;color:var(--text);outline:none;resize:vertical;min-height:80px;transition:border-color var(--transition)}
-.contact-reply-area textarea:focus{border-color:var(--rose)}
-.contact-reply-actions{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
-.contact-tags{display:flex;gap:6px;flex-wrap:wrap}
-.contact-tag{font-size:10px;padding:2px 8px;background:var(--blush);color:var(--text-soft);border-radius:2px;font-weight:500}
+.contact-detail-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.contact-detail-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.contact-detail-meta {
+  font-size: 11px;
+  color: var(--text-soft);
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.contact-detail-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.contact-detail-meta svg {
+  width: 11px;
+  height: 11px;
+  stroke: currentColor;
+  fill: none;
+}
+.contact-detail-subject {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 14px 20px;
+  background: var(--off-white);
+  border-bottom: 1px solid var(--border);
+}
+.contact-detail-body {
+  padding: 20px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.contact-reply-area {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+  background: var(--off-white);
+}
+.contact-reply-area textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  font-family: "Jost", sans-serif;
+  font-size: 13px;
+  color: var(--text);
+  outline: none;
+  resize: vertical;
+  min-height: 80px;
+  transition: border-color var(--transition);
+}
+.contact-reply-area textarea:focus {
+  border-color: var(--rose);
+}
+.contact-reply-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+.contact-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.contact-tag {
+  font-size: 10px;
+  padding: 2px 8px;
+  background: var(--blush);
+  color: var(--text-soft);
+  border-radius: 2px;
+  font-weight: 500;
+}
 
-@media(max-width:900px){.contact-layout{grid-template-columns:1fr}.contact-list{max-height:300px;overflow-y:auto}}
-@media(max-width:480px){.contact-stats-grid{grid-template-columns:1fr 1fr}}
+@media (max-width: 900px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+  .contact-list {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+}
+@media (max-width: 480px) {
+  .contact-stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

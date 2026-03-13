@@ -1,110 +1,171 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Shainy Creation – Dashboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/main.css">
-<link rel="stylesheet" href="../css/dashboard.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-</head>
-<body>
-<div id="sidebar-container"></div>
-<div class="main">
-  <div id="topbar-container"></div>
-  <div class="page-content">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px">
-      <div>
-        <h1 class="page-heading">Good morning, Shainy ✦</h1>
-        <p class="text-soft text-sm" style="margin-top:2px">Here's what's happening with your store today.</p>
-      </div>
-      <div style="display:flex;gap:8px">
-        <select class="filter-select" id="dash-range">
-          <option>Today</option><option selected>Last 7 Days</option><option>Last 30 Days</option><option>Last 90 Days</option>
-        </select>
-        <button class="btn btn-primary btn-sm" onclick="exportDashboard()">
-          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Export
-        </button>
-      </div>
-    </div>
-
-    <!-- Stat Cards -->
-    <div class="stat-grid" id="stat-grid"></div>
-
-    <!-- Charts -->
-    <div class="chart-grid">
-      <div class="card">
-        <div class="card-header">
-          <div><div class="card-title">Revenue Trend</div><div class="card-subtitle">Daily revenue for selected period</div></div>
-          <div style="display:flex;gap:8px">
-            <span class="legend-dot rose">Revenue</span>
-            <span class="legend-dot gold">Orders</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Shainy Creation – Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <div id="sidebar-container"></div>
+    <div class="main">
+      <div id="topbar-container"></div>
+      <div class="page-content">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+          "
+        >
+          <div>
+            <h1 class="page-heading">Good morning, Shainy ✦</h1>
+            <p class="text-soft text-sm" style="margin-top: 2px">
+              Here's what's happening with your store today.
+            </p>
+          </div>
+          <div style="display: flex; gap: 8px">
+            <select class="filter-select" id="dash-range">
+              <option>Today</option>
+              <option selected>Last 7 Days</option>
+              <option>Last 30 Days</option>
+              <option>Last 90 Days</option>
+            </select>
+            <button class="btn btn-primary btn-sm" onclick="exportDashboard()">
+              <svg viewBox="0 0 24 24">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Export
+            </button>
           </div>
         </div>
-        <div class="chart-wrap"><canvas id="revenueChart"></canvas></div>
-      </div>
-      <div class="card">
-        <div class="card-header"><div class="card-title">Orders by Status</div></div>
-        <div class="chart-wrap" style="height:200px"><canvas id="statusChart"></canvas></div>
-      </div>
-    </div>
 
-    <!-- Quick Actions -->
-    <div class="quick-actions">
-      <div class="quick-action" onclick="location.href='orders.html'">
-        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        <div class="quick-action-label">View Orders</div>
-      </div>
-      <div class="quick-action" onclick="location.href='products.html'">
-        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        <div class="quick-action-label">Add Product</div>
-      </div>
-      <div class="quick-action" onclick="location.href='discounts.html'">
-        <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-        <div class="quick-action-label">Create Discount</div>
-      </div>
-      <div class="quick-action" onclick="location.href='analytics.html'">
-        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        <div class="quick-action-label">View Analytics</div>
-      </div>
-    </div>
+        <!-- Stat Cards -->
+        <div class="stat-grid" id="stat-grid"></div>
 
-    <div class="dash-bottom-grid">
-      <div class="card">
-        <div class="card-header">
-          <div><div class="card-title">Recent Orders</div></div>
-          <a href="orders.html" class="btn btn-outline btn-sm">View All</a>
+        <!-- Charts -->
+        <div class="chart-grid">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Revenue Trend</div>
+                <div class="card-subtitle">
+                  Daily revenue for selected period
+                </div>
+              </div>
+              <div style="display: flex; gap: 8px">
+                <span class="legend-dot rose">Revenue</span>
+                <span class="legend-dot gold">Orders</span>
+              </div>
+            </div>
+            <div class="chart-wrap"><canvas id="revenueChart"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Orders by Status</div>
+            </div>
+            <div class="chart-wrap" style="height: 200px">
+              <canvas id="statusChart"></canvas>
+            </div>
+          </div>
         </div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Order</th><th>Customer</th><th>Amount</th><th>Status</th></tr></thead>
-            <tbody id="dash-orders"></tbody>
-          </table>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+          <div class="quick-action" onclick="location.href = 'orders.html'">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+              />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>
+            <div class="quick-action-label">View Orders</div>
+          </div>
+          <div class="quick-action" onclick="location.href = 'products.php'">
+            <svg viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            <div class="quick-action-label">Add Product</div>
+          </div>
+          <div class="quick-action" onclick="location.href = 'discounts.html'">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"
+              />
+              <line x1="7" y1="7" x2="7.01" y2="7" />
+            </svg>
+            <div class="quick-action-label">Create Discount</div>
+          </div>
+          <div class="quick-action" onclick="location.href = 'analytics.html'">
+            <svg viewBox="0 0 24 24">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+            <div class="quick-action-label">View Analytics</div>
+          </div>
+        </div>
+
+        <div class="dash-bottom-grid">
+          <div class="card">
+            <div class="card-header">
+              <div><div class="card-title">Recent Orders</div></div>
+              <a href="orders.html" class="btn btn-outline btn-sm">View All</a>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Order</th>
+                    <th>Customer</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="dash-orders"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Live Activity</div>
+            </div>
+            <div id="activity-feed"></div>
+          </div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-header"><div class="card-title">Live Activity</div></div>
-        <div id="activity-feed"></div>
-      </div>
     </div>
-  </div>
-</div>
 
-<!-- New Order Toast (bigger) -->
-<div class="new-order-popup" id="newOrderPopup">
-  <div class="popup-icon">🛍</div>
-  <div class="popup-body">
-    <div class="popup-title">New Order Received!</div>
-    <div class="popup-sub" id="popup-sub">Order #SC-1051 from Priya Mehta · ₹2,400</div>
-  </div>
-  <button class="popup-close" onclick="document.getElementById('newOrderPopup').classList.remove('show')">×</button>
-</div>
+    <!-- New Order Toast (bigger) -->
+    <div class="new-order-popup" id="newOrderPopup">
+      <div class="popup-icon">🛍</div>
+      <div class="popup-body">
+        <div class="popup-title">New Order Received!</div>
+        <div class="popup-sub" id="popup-sub">
+          Order #SC-1051 from Priya Mehta · ₹2,400
+        </div>
+      </div>
+      <button
+        class="popup-close"
+        onclick="
+          document.getElementById('newOrderPopup').classList.remove('show')
+        "
+      >
+        ×
+      </button>
+    </div>
 
-<script src="../js/data.js"></script>
-<script src="../js/components.js"></script>
-<script src="../js/dashboard.js"></script>
-</body>
+    <script src="../js/data.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/dashboard.js"></script>
+  </body>
 </html>
