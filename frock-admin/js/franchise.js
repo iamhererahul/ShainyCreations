@@ -66,16 +66,6 @@ function renderFranchise() {
   else list.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   /* Stats */
-  document.getElementById("fr-total").textContent = SC_FRANCHISE.length;
-  document.getElementById("fr-new").textContent = SC_FRANCHISE.filter(
-    (f) => f.status === "New",
-  ).length;
-  document.getElementById("fr-approved").textContent = SC_FRANCHISE.filter(
-    (f) => f.status === "Approved",
-  ).length;
-  document.getElementById("fr-rejected").textContent = SC_FRANCHISE.filter(
-    (f) => f.status === "Rejected",
-  ).length;
 
   const container = document.getElementById("franchise-cards");
   if (!container) return;
@@ -227,7 +217,7 @@ function exportFranchise() {
     "Phone",
     "City",
     "State",
-    "Budget",
+    "Space Available",
     "Experience",
     "Date",
     "Status",

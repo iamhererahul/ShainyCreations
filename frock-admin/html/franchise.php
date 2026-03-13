@@ -1,6 +1,20 @@
 <?php
 include "../config.php";
+/* =========================
+   STATS FROM DATABASE
+========================= */
 
+$total_q = mysqli_query($conn,"SELECT COUNT(*) as total FROM franchise_applications");
+$total = mysqli_fetch_assoc($total_q)['total'];
+
+$new_q = mysqli_query($conn,"SELECT COUNT(*) as total FROM franchise_applications WHERE status='New'");
+$new = mysqli_fetch_assoc($new_q)['total'];
+
+$approved_q = mysqli_query($conn,"SELECT COUNT(*) as total FROM franchise_applications WHERE status='Approved'");
+$approved = mysqli_fetch_assoc($approved_q)['total'];
+
+$rejected_q = mysqli_query($conn,"SELECT COUNT(*) as total FROM franchise_applications WHERE status='Rejected'");
+$rejected = mysqli_fetch_assoc($rejected_q)['total'];
 $franchise_data = [];
 
 $query = "SELECT * FROM franchise_applications ORDER BY id DESC";
@@ -51,12 +65,29 @@ $franchise_data[] = [
     </div>
 
     <!-- Stats -->
-    <div class="franchise-stats-grid">
-      <div class="mini-stat"><div class="mini-stat-label">Total Applications</div><div class="mini-stat-val" id="fr-total">0</div></div>
-      <div class="mini-stat orange"><div class="mini-stat-label">New / Unread</div><div class="mini-stat-val" id="fr-new">0</div></div>
-      <div class="mini-stat green"><div class="mini-stat-label">Approved</div><div class="mini-stat-val" id="fr-approved">0</div></div>
-      <div class="mini-stat red"><div class="mini-stat-label">Rejected</div><div class="mini-stat-val" id="fr-rejected">0</div></div>
-    </div>
+   <div class="franchise-stats-grid">
+
+<div class="mini-stat">
+<div class="mini-stat-label">Total Applications</div>
+<div class="mini-stat-val"><?php echo $total; ?></div>
+</div>
+
+<div class="mini-stat orange">
+<div class="mini-stat-label">New / Unread</div>
+<div class="mini-stat-val"><?php echo $new; ?></div>
+</div>
+
+<div class="mini-stat green">
+<div class="mini-stat-label">Approved</div>
+<div class="mini-stat-val"><?php echo $approved; ?></div>
+</div>
+
+<div class="mini-stat red">
+<div class="mini-stat-label">Rejected</div>
+<div class="mini-stat-val"><?php echo $rejected; ?></div>
+</div>
+
+</div>
 
     <div class="filter-row">
       <input class="filter-input" placeholder="Search by name, city, email…" id="fr-search" oninput="filterFranchise()">
