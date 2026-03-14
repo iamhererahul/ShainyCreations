@@ -1,5 +1,6 @@
 <?php
 include "config.php";
+include "send_invoice.php";
 ?>
 
 <!DOCTYPE html>

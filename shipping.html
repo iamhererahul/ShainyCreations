@@ -604,7 +604,13 @@
     <!-- Main Layout -->
     <div class="shipping-layout">
       <!-- Left: Form -->
-      <form method="POST" action="save-checkout.php">
+      <form
+        id="shipping-form"
+        method="POST"
+        action="save-checkout.php"
+        onsubmit="updateCartData()"
+      >
+        <input type="hidden" id="cart_data" name="cart_data" value="" />
         <div>
           <!-- Contact Info -->
           <div class="form-card" style="margin-bottom: 20px">
@@ -649,11 +655,12 @@
                     name="email"
                     placeholder="priya@email.com"
                     required
-                    style="flex: 1"
+                    style="flex: 1; padding: 10px; border: 1px solid #ccc"
                   />
 
                   <button
                     type="button"
+                    id="send-email-btn"
                     onclick="sendEmailOTP()"
                     style="
                       padding: 10px 16px;
@@ -688,7 +695,7 @@
                       cursor: pointer;
                     "
                   >
-                    Verify
+                    Verify OTP
                   </button>
                 </div>
 
@@ -710,73 +717,34 @@
           <!-- Phone -->
           <div class="form-card" style="margin-bottom: 20px">
             <div class="form-card-head">
-              <h2>Phone Verification</h2>
+              <h2>Phone Number</h2>
             </div>
 
             <div class="form-card-body">
               <div class="form-group">
                 <label>Mobile Number *</label>
 
-                <div class="phone-row">
-                  <input
-                    type="tel"
-                    id="inp-phone"
-                    name="phone"
-                    placeholder="9876543210"
-                    maxlength="10"
-                    required
-                  />
-
-                  <button
-                    type="button"
-                    onclick="sendPhoneOTP()"
-                    style="
-                      padding: 10px 16px;
-                      background: black;
-                      color: white;
-                      border: none;
-                      font-size: 12px;
-                      cursor: pointer;
-                    "
-                  >
-                    Send OTP
-                  </button>
-                </div>
-
-                <div style="margin-top: 10px; display: flex; gap: 10px">
-                  <input
-                    type="text"
-                    id="phone-otp"
-                    placeholder="Enter Mobile OTP"
-                    style="flex: 1; padding: 10px; border: 1px solid #ccc"
-                  />
-
-                  <button
-                    type="button"
-                    onclick="verifyPhoneOTP()"
-                    style="
-                      padding: 10px 16px;
-                      background: #d85c72;
-                      color: white;
-                      border: none;
-                      font-size: 12px;
-                      cursor: pointer;
-                    "
-                  >
-                    Verify
-                  </button>
-                </div>
+                <input
+                  type="tel"
+                  id="inp-phone"
+                  name="phone"
+                  placeholder="Enter 10 digit mobile number"
+                  maxlength="10"
+                  required
+                  style="padding: 12px; border: 1px solid #ccc"
+                  oninput="validatePhone()"
+                />
 
                 <div
-                  id="phone-verified"
+                  id="phone-error"
                   style="
                     display: none;
-                    color: green;
+                    color: #e05555;
                     font-size: 12px;
                     margin-top: 6px;
                   "
                 >
-                  ✔ Mobile Verified
+                  Please enter a valid 10 digit mobile number
                 </div>
               </div>
             </div>
@@ -890,20 +858,57 @@
 
             <div class="form-card-body">
               <div class="payment-options">
+                <!-- COD -->
                 <label class="pay-option">
-                  <input type="radio" name="payment" value="cod" checked />
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="cod"
+                    checked
+                    onclick="togglePayment()"
+                  />
                   💵 Cash on Delivery
                 </label>
 
+                <!-- UPI -->
                 <label class="pay-option">
-                  <input type="radio" name="payment" value="upi" />
-                  📱 UPI / QR Code
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="upi"
+                    onclick="togglePayment()"
+                  />
+                  📱 Pay via UPI / QR
                 </label>
+              </div>
 
-                <label class="pay-option">
-                  <input type="radio" name="payment" value="card" />
-                  💳 Credit / Debit Card
-                </label>
+              <!-- QR Payment Section -->
+              <div id="upi-section" style="display: none; margin-top: 20px">
+                <p style="font-size: 13px; margin-bottom: 10px">
+                  Scan the QR code below and complete payment.
+                </p>
+
+                <img
+                  src="images/upi-qr.png"
+                  style="width: 180px; border: 1px solid #ddd; padding: 10px"
+                />
+
+                <p style="font-size: 12px; margin-top: 10px; color: #777">
+                  After payment enter the UTR / Transaction ID below.
+                </p>
+
+                <input
+                  type="text"
+                  id="utr"
+                  name="utr"
+                  placeholder="Enter UTR / Transaction ID"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    margin-top: 8px;
+                    border: 1px solid #ccc;
+                  "
+                />
               </div>
             </div>
           </div>
@@ -912,8 +917,8 @@
 
           <div style="margin-top: 25px">
             <button
-              type="submit"
-              name="place_order"
+              type="button"
+              onclick="placeOrder()"
               style="
                 width: 100%;
                 padding: 14px;
@@ -1006,10 +1011,13 @@
     <script src="js/products.js"></script>
     <script src="js/cart.js"></script>
     <script>
-      /* ── Populate Order Summary ── */
+      /* ───────── CART SUMMARY ───────── */
+
       function populateSummary() {
         const cart = getCart();
+
         const wrap = document.getElementById("summary-items");
+
         if (!cart.length) {
           window.location.href = "cart.html";
           return;
@@ -1017,280 +1025,346 @@
 
         let subtotal = 0;
         let html = "";
+
         cart.forEach((item) => {
           const line = item.price * (item.qty || 1);
+
           subtotal += line;
+
           html += `
-    <div class="sum-item">
-      <div class="sum-item-img">
-        <div class="dress-ph ${item.color || "dress-pink"}" style="width:32px;height:52px"></div>
-        <span class="sum-item-badge">${item.qty || 1}</span>
-      </div>
-      <div class="sum-item-info">
-        <div class="sum-item-name">${item.name}</div>
-        <div class="sum-item-meta">Size: ${item.size || "M"} · ${item.age || "3–5 Yrs"}</div>
-      </div>
-      <div class="sum-item-price">₹${line.toLocaleString()}</div>
-    </div>`;
+<div class="sum-item">
+
+<div class="sum-item-img">
+<div class="dress-ph ${item.color || "dress-pink"}" style="width:32px;height:52px"></div>
+<span class="sum-item-badge">${item.qty || 1}</span>
+</div>
+
+<div class="sum-item-info">
+<div class="sum-item-name">${item.name}</div>
+<div class="sum-item-meta">Size: ${item.size || "M"} · ${item.age || "3–5 Yrs"}</div>
+</div>
+
+<div class="sum-item-price">₹${line.toLocaleString()}</div>
+
+</div>
+`;
         });
+
         wrap.innerHTML = html;
 
         const shipping = subtotal >= 1500 ? 0 : 99;
+
         document.getElementById("ship-subtotal").textContent =
           "₹" + subtotal.toLocaleString();
+
         document.getElementById("ship-shipping").textContent =
           shipping === 0 ? "FREE" : "₹" + shipping;
+
         document.getElementById("ship-total").textContent =
           "₹" + (subtotal + shipping).toLocaleString();
-        if (shipping === 0)
+
+        if (shipping === 0) {
           document.getElementById("free-ship-note").style.display = "flex";
+        }
       }
+
       document.addEventListener("DOMContentLoaded", populateSummary);
 
-      /* ── Payment Selection ── */
-      function selectPayment(el, id) {
-        document
-          .querySelectorAll(".pay-option")
-          .forEach((o) => o.classList.remove("selected"));
-        el.classList.add("selected");
-      }
+      /* ───────── OTP VARIABLES ───────── */
 
-      /* ── OTP Logic ── */
-      let otpVerified = false;
-      let resendTimer = null;
-      let DEMO_OTP = "123456"; // In production replace with real SMS API
-
-      function sendOTP() {
-        const phone = document
-          .getElementById("inp-phone")
-          .value.replace(/\D/g, "");
-        if (phone.length < 10) {
-          document.getElementById("fg-phone").classList.add("show-err");
-          return;
-        }
-        document.getElementById("fg-phone").classList.remove("show-err");
-        document.getElementById("send-otp-btn").disabled = true;
-        document.getElementById("send-otp-btn").textContent = "Sent ✓";
-        document.getElementById("otp-wrap").classList.add("show");
-        document.getElementById("otp0").focus();
-        startResendCountdown(30);
-        // In production: call your SMS API here (Twilio, MSG91, Fast2SMS etc.)
-      }
-
-      function resendOTP() {
-        document.getElementById("resend-link").classList.remove("show");
-        startResendCountdown(30);
-        document.getElementById("otp-hint").textContent =
-          "OTP resent! Demo OTP: 123456";
-        for (let i = 0; i < 6; i++)
-          document.getElementById("otp" + i).value = "";
-        document.getElementById("otp0").focus();
-      }
-
-      function startResendCountdown(secs) {
-        clearInterval(resendTimer);
-        const cd = document.getElementById("otp-countdown");
-        const rl = document.getElementById("resend-link");
-        rl.classList.remove("show");
-        let remaining = secs;
-        cd.textContent = `Resend in ${remaining}s`;
-        resendTimer = setInterval(() => {
-          remaining--;
-          if (remaining <= 0) {
-            clearInterval(resendTimer);
-            cd.textContent = "";
-            rl.classList.add("show");
-          } else {
-            cd.textContent = `Resend in ${remaining}s`;
-          }
-        }, 1000);
-      }
-
-      function verifyOTP() {
-        let entered = "";
-        for (let i = 0; i < 6; i++)
-          entered += document.getElementById("otp" + i).value;
-        if (entered === DEMO_OTP) {
-          otpVerified = true;
-          document.getElementById("otp-verified").classList.add("show");
-          document.getElementById("otp-hint").style.display = "none";
-          document.getElementById("otp-countdown").style.display = "none";
-          document.getElementById("resend-link").classList.remove("show");
-          for (let i = 0; i < 6; i++) {
-            const d = document.getElementById("otp" + i);
-            d.disabled = true;
-            d.style.borderColor = "#2d8a55";
-          }
-        } else {
-          alert("Incorrect OTP. Please try again. (Demo: 123456)");
-          for (let i = 0; i < 6; i++)
-            document.getElementById("otp" + i).value = "";
-          document.getElementById("otp0").focus();
-        }
-      }
-
-      // Auto-advance OTP digits
-      document.querySelectorAll(".otp-digit").forEach((inp, i, arr) => {
-        inp.addEventListener("input", () => {
-          if (inp.value && i < arr.length - 1) arr[i + 1].focus();
-        });
-        inp.addEventListener("keydown", (e) => {
-          if (e.key === "Backspace" && !inp.value && i > 0) arr[i - 1].focus();
-        });
-      });
-
-      /* ── Validation & Place Order ── */
-      function validate() {
-        let ok = true;
-        const checks = [
-          ["fg-fname", "inp-fname", (v) => v.trim().length > 0],
-          ["fg-lname", "inp-lname", (v) => v.trim().length > 0],
-          [
-            "fg-email",
-            "inp-email",
-            (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
-          ],
-          ["fg-phone", "inp-phone", (v) => v.replace(/\D/g, "").length >= 10],
-          ["fg-addr1", "inp-addr1", (v) => v.trim().length > 3],
-          ["fg-city", "inp-city", (v) => v.trim().length > 0],
-          ["fg-state", "inp-state", (v) => v !== ""],
-          ["fg-pin", "inp-pin", (v) => /^\d{6}$/.test(v.replace(/\D/g, ""))],
-        ];
-        checks.forEach(([fg, inp, test]) => {
-          const val = document.getElementById(inp).value;
-          const fg_el = document.getElementById(fg);
-          if (!test(val)) {
-            fg_el.classList.add("show-err");
-            ok = false;
-          } else fg_el.classList.remove("show-err");
-        });
-        return ok;
-      }
-
-      function placeOrder() {
-        if (!validate()) {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-          return;
-        }
-        if (!otpVerified) {
-          alert(
-            "Please verify your phone number with OTP before placing the order.",
-          );
-          document.getElementById("otp-wrap").classList.add("show");
-          document
-            .getElementById("inp-phone")
-            .scrollIntoView({ behavior: "smooth" });
-          return;
-        }
-
-        // Build order data
-        const cart = getCart();
-        let subtotal = cart.reduce((s, i) => s + i.price * (i.qty || 1), 0);
-        const shipping = subtotal >= 1500 ? 0 : 99;
-        const total = subtotal + shipping;
-        const orderId = "SC" + Date.now().toString().slice(-8);
-        const paymentMethod = document.querySelector(
-          "input[name=payment]:checked",
-        ).value;
-
-        const order = {
-          id: orderId,
-          items: cart,
-          subtotal,
-          shipping,
-          total,
-          paymentMethod,
-          customer: {
-            firstName: document.getElementById("inp-fname").value,
-            lastName: document.getElementById("inp-lname").value,
-            email: document.getElementById("inp-email").value,
-            phone: document.getElementById("inp-phone").value,
-            address: document.getElementById("inp-addr1").value,
-            address2: document.getElementById("inp-addr2").value,
-            city: document.getElementById("inp-city").value,
-            state: document.getElementById("inp-state").value,
-            pin: document.getElementById("inp-pin").value,
-            landmark: document.getElementById("inp-landmark").value,
-          },
-          date: new Date().toISOString(),
-        };
-
-        localStorage.setItem("sc_last_order", JSON.stringify(order));
-        // Clear cart
-        localStorage.removeItem("sc_cart");
-        // Redirect to confirmation
-        window.location.href = "order-confirmation.html";
-      }
       let emailVerified = false;
       let phoneVerified = false;
+
+      /* ───────── SEND EMAIL OTP ───────── */
 
       function sendEmailOTP() {
         let email = document.getElementById("inp-email").value;
 
-        fetch("send-email-otp.php", {
+        if (email == "") {
+          showToast("Please enter email", "#e05555");
+          return;
+        }
+
+        fetch("send_otp.php", {
           method: "POST",
+          credentials: "same-origin",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           body: "email=" + email,
         })
           .then((res) => res.text())
+
           .then((data) => {
-            alert("OTP sent to Email");
+            if (data == "OTP_SENT") {
+              showToast("OTP sent to your email", "#2d8a55");
+
+              document.getElementById("send-email-btn").innerText = "OTP Sent";
+            } else {
+              showToast("Error sending OTP", "#e05555");
+            }
           });
       }
+
+      /* ───────── VERIFY EMAIL OTP ───────── */
 
       function verifyEmailOTP() {
         let otp = document.getElementById("email-otp").value;
 
-        fetch("verify-email-otp.php", {
+        if (otp == "") {
+          showToast("Enter OTP", "#e05555");
+
+          return;
+        }
+
+        fetch("verify_otp.php", {
           method: "POST",
+          credentials: "same-origin",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           body: "otp=" + otp,
         })
           .then((res) => res.text())
+
           .then((data) => {
-            if (data == "success") {
+            if (data == "VERIFIED") {
               emailVerified = true;
+
               document.getElementById("email-verified").style.display = "block";
-              alert("Email Verified");
+
+              showToast("Email verified successfully", "#2d8a55");
             } else {
-              alert("Invalid Email OTP");
+              showToast("Invalid OTP", "#e05555");
             }
           });
       }
 
-      function sendPhoneOTP() {
+      /* ───────── PHONE VALIDATION ───────── */
+
+      function validatePhone() {
         let phone = document.getElementById("inp-phone").value;
 
-        fetch("send-phone-otp.php", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: "phone=" + phone,
-        })
-          .then((res) => res.text())
-          .then((data) => {
-            alert("OTP sent to Mobile");
-          });
+        let error = document.getElementById("phone-error");
+
+        if (!/^[6-9]\d{9}$/.test(phone)) {
+          error.style.display = "block";
+        } else {
+          error.style.display = "none";
+        }
       }
 
-      function verifyPhoneOTP() {
-        let otp = document.getElementById("phone-otp").value;
+      /* ───────── PAYMENT TOGGLE ───────── */
 
-        fetch("verify-phone-otp.php", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: "otp=" + otp,
-        })
-          .then((res) => res.text())
-          .then((data) => {
-            if (data == "success") {
-              phoneVerified = true;
-              document.getElementById("phone-verified").style.display = "block";
-              alert("Mobile Verified");
-            } else {
-              alert("Invalid Mobile OTP");
-            }
-          });
+      function togglePayment() {
+        let payment = document.querySelector(
+          'input[name="payment"]:checked',
+        ).value;
+
+        let upiSection = document.getElementById("upi-section");
+
+        if (payment === "upi") {
+          upiSection.style.display = "block";
+        } else {
+          upiSection.style.display = "none";
+        }
+      }
+
+      /* ───────── FORM VALIDATION ───────── */
+
+      function validate() {
+        let ok = true;
+
+        const checks = [
+          ["inp-fname", (v) => v.trim().length > 0],
+
+          ["inp-lname", (v) => v.trim().length > 0],
+
+          ["inp-email", (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)],
+
+          ["inp-phone", (v) => /^[6-9]\d{9}$/.test(v)],
+
+          ["inp-addr1", (v) => v.trim().length > 3],
+
+          ["inp-city", (v) => v.trim().length > 0],
+
+          ["inp-state", (v) => v !== ""],
+        ];
+
+        checks.forEach(([id, test]) => {
+          const el = document.getElementById(id);
+
+          if (!test(el.value)) {
+            el.style.borderColor = "red";
+
+            ok = false;
+          } else {
+            el.style.borderColor = "";
+          }
+        });
+
+        return ok;
+      }
+
+      /* ───────── PLACE ORDER ───────── */
+      function updateCartData() {
+        document.getElementById("cart_data").value = JSON.stringify(getCart());
+      }
+
+      function placeOrder() {
+        if (!validate()) {
+          showToast("Please fill all required fields", "#e05555");
+
+          return;
+        }
+
+        /* EMAIL VERIFICATION CHECK */
+
+        if (!emailVerified) {
+          showToast("Please verify your email before placing order", "#e05555");
+
+          return;
+        }
+
+        /* PAYMENT METHOD CHECK */
+
+        let paymentMethod = document.querySelector(
+          'input[name="payment"]:checked',
+        );
+
+        if (!paymentMethod) {
+          showToast("Please select payment method", "#e05555");
+
+          return;
+        }
+
+        paymentMethod = paymentMethod.value;
+
+        /* UPI PAYMENT VALIDATION */
+
+        if (paymentMethod === "upi") {
+          let utrField = document.getElementById("utr");
+
+          let utr = utrField ? utrField.value.trim() : "";
+
+          if (utr === "" || utr.length < 8) {
+            showToast(
+              "Please complete payment and enter valid UTR number",
+              "#e05555",
+            );
+
+            return;
+          }
+        }
+
+        /* CART CHECK */
+
+        const cart = getCart();
+
+        if (!cart || cart.length === 0) {
+          showToast("Your cart is empty", "#e05555");
+
+          return;
+        }
+
+        /* CALCULATE TOTAL */
+
+        let subtotal = cart.reduce((s, i) => s + i.price * (i.qty || 1), 0);
+
+        const shipping = subtotal >= 1500 ? 0 : 99;
+
+        const total = subtotal + shipping;
+
+        const orderId = "SC" + Date.now().toString().slice(-8);
+
+        /* CREATE ORDER OBJECT */
+
+        const order = {
+          id: orderId,
+
+          items: cart,
+
+          subtotal: subtotal,
+
+          shipping: shipping,
+
+          total: total,
+
+          paymentMethod: paymentMethod,
+
+          utr: document.getElementById("utr")
+            ? document.getElementById("utr").value
+            : "",
+
+          customer: {
+            firstName: document.getElementById("inp-fname").value,
+
+            lastName: document.getElementById("inp-lname").value,
+
+            email: document.getElementById("inp-email").value,
+
+            phone: document.getElementById("inp-phone").value,
+
+            address: document.getElementById("inp-addr1").value,
+
+            address2: document.getElementById("inp-addr2").value,
+
+            city: document.getElementById("inp-city").value,
+
+            state: document.getElementById("inp-state").value,
+
+            pin: document.getElementById("inp-pin").value,
+
+            landmark: document.getElementById("inp-landmark").value,
+          },
+
+          date: new Date().toISOString(),
+        };
+
+        /* SAVE ORDER */
+
+        localStorage.setItem("sc_last_order", JSON.stringify(order));
+
+        localStorage.removeItem("sc_cart");
+
+        showToast("Order placed successfully!", "#2d8a55");
+
+        setTimeout(function () {
+          window.location.href = "order-success.php";
+        }, 1500);
+      }
+      /* ───────── TOAST MESSAGE ───────── */
+
+      function showToast(message, color = "#000") {
+        let toast = document.getElementById("toast-msg");
+
+        if (!toast) return;
+
+        toast.innerText = message;
+
+        toast.style.background = color;
+
+        toast.style.display = "block";
+
+        setTimeout(() => {
+          toast.style.display = "none";
+        }, 3000);
       }
     </script>
+    <div
+      id="toast-msg"
+      style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #000;
+        color: #fff;
+        padding: 14px 18px;
+        border-radius: 6px;
+        font-size: 14px;
+        display: none;
+        z-index: 9999;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: opacity 0.3s;
+      "
+    >
+      Message
+    </div>
   </body>
 </html>
